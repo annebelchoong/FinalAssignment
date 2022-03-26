@@ -23,14 +23,8 @@ public class KaraokeSession {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("--------------------------------------------");
-        System.out.println("|                                           |");
-        System.out.println("|    Welcome to " + "for your karaoke session!   |");
-        System.out.println("|                                           |");
-        System.out.println("--------------------------------------------");
-
-        System.out.println();
-        System.out.println();
+        Utility.clearScreen();
+        welcome();
         // initData();
         startSession();
 
@@ -55,12 +49,24 @@ public class KaraokeSession {
 
     }
 
+    public static void welcome(){
+        System.out.println("--------------------------------------------");
+        System.out.println("|                                           |");
+        System.out.println("|    Welcome to " + "for your karaoke session!   |");
+        System.out.println("|                                           |");
+        System.out.println("--------------------------------------------");
+
+        System.out.println();
+        System.out.println();
+    }
+
     public static void homeMenu() {
 
         System.out.println(" M   E   N   U");
         System.out.println("===============");
         System.out.println("[1] Select song");
-        System.out.println("[2] Display playlist \n\n");
+        System.out.println("[2] Display playlist");
+        System.out.println("[0] Exit Sesion\n\n");
         System.out.print("Enter your choice: ");
     }
 
@@ -70,43 +76,33 @@ public class KaraokeSession {
 
     // }
 
-    public static void continueP() {
-        System.out.println("\n\n Press any key to continue");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-        }
-    }
-
     public static void startSession() {
-        
+        boolean isQuit = false;
         do {
-            try {
-                Utility.clearScreen();
+                // Utility.clearScreen();
                 homeMenu();
-                int menuChoice = input.nextInt();
-                input.nextLine();
+                String menuChoice = input.nextLine();
                 System.out.println();
                 System.out.println();
                 switch (menuChoice) {
-                    case 1:
+                    case "1":
                         playlist.promptSelectSong();
-                        continueP();
+                        // Utility.cont();
                         break;
-                    case 2:
+                    case "2":
                         // playlist.displayPlaylist();
                         playlist.playlistMenu();
+                        break;
+                    case "0": 
+                        isQuit = true;
                         break;
                     default:
                         Utility.clearScreen();
                         System.out.println("Invalid input. Please try again. \n");
                         break;
                 }
-            } catch (Exception e) {
-                System.out.println("Invalid input");
-            }
 
-        } while (true);
+        } while (!isQuit);
 
     }
 

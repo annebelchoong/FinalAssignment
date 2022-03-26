@@ -39,14 +39,14 @@ public class Playlist {
         System.out.println("[2] Skip current song");
         System.out.println("[3] Make song play next");
         System.out.println("[4] Delete Song from queue");
-        System.out.println("[5] Back \n\n");
+        System.out.println("[0] Back \n\n");
         System.out.print("Enter your choice: ");
     }
 
     public void playlistMenu() {
         Utility.clearScreen();
+        displayPlaylist();
         do {
-            displayPlaylist();
             displayPlaylistMenu();
             int menuChoice = input.nextInt();
             input.nextLine();
@@ -62,7 +62,7 @@ public class Playlist {
                     break;
                 case 4:
                     break;
-                case 5:
+                case 0:
                     return;
             }
         } while (true);
@@ -71,36 +71,31 @@ public class Playlist {
 
     public void promptSelectSong() {
         Utility.clearScreen();
+        songData.viewSongLibrary();
         do {
-            playlistHeader();
-            songData.displaySongList();
             try {
                 System.out.print("\nEnter songID to select song or 0 to return: ");
-                int songChoice = input.nextInt();
-                input.nextLine();
+                String songChoice = input.nextLine();
 
-                if (songChoice == 0) {
+                if (songChoice.equals("0")) {
+                    Utility.clearScreen();
                     return;
                 } else {
                     Iterator<Song> it = songData.songList.getIterator();
                     while (it.hasNext()) {
                         Song songIt = it.next();
-                        if (songChoice == songIt.getSongID()) {
-                            // System.out.println("\n\n"+songIt.getSongID() + "\t" + songIt.getSongName() +
-                            // "\t" + songIt.getArtist() + "\t" + songIt.getSongURL() + "\n");
+                        if (songChoice.equals(String.valueOf(songIt.songID))) {
                             addSong(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                                     songIt.getSongURL()));
                             break;
-                        } 
-                        // else {
-                        //     System.out.println("\nInvalid Song ID\n");
-                        //     break;
-                        // }
+                        } else if (songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
+                            System.out.println("\n--- Invalid Song ID. Please try again. \n");
+                        }
                     }
-
                 }
             } catch (Exception e) {
                 System.out.println("Invalid input");
+                // break;
             }
         } while (true);
 
@@ -110,22 +105,21 @@ public class Playlist {
 
     }
 
-    public void addSong(Song newSong) {
+    private void addSong(Song newSong) {
         // retrive song name from song library
         songQueue.insert(newSong);
 
-        System.out.println("\nSong \"" + newSong.getSongName() + "\" has added to queue\n\n");
+        System.out.println("\n--- Song \"" + newSong.getSongName() + "\" has added to song queue!\n");
     }
 
     public void displayPlaylist() {
-        playlistHeader();
+        Utility.songlistHeader();
         System.out.println(songQueue);
     }
 
     public void playSong() {
-        System.out.println("Song playing now: ");
-        playlistHeader();
-        System.out.println(songQueue.removeMin());
+        System.out.print("Song playing now: ");
+        // System.out.println(songQueue.removeMin().getSongName());
     }
 
     public Song skipSong() {
@@ -142,9 +136,4 @@ public class Playlist {
 
     }
 
-    public void playlistHeader() {
-        System.out.printf("%-10s %-30s %-20s %-20s\n", "Song ID", "Song Name", "Artist", "URL");
-        System.out.println(
-                "--------------------------------------------------------------------------------------------------------------");
-    }
 }

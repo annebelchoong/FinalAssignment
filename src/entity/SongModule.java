@@ -208,7 +208,7 @@ public class SongModule extends Song {
         // System.out.println("The song is not in the database");
     }
 
-    private void viewSongLibrary() {
+    public void viewSongLibrary() {
 
         System.out.println("SONGLIST ");
         System.out.println("=========");
