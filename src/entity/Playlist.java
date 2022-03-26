@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author annebelchoong
@@ -38,9 +40,23 @@ public class Playlist {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Playlist)) {
+            return false;
+        }
+        Playlist playlist = (Playlist) o;
+        return playlistID == playlist.playlistID && Objects.equals(playlistName, playlist.playlistName);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(playlistID, playlistName);
+    }
+    
+    @Override
     public String toString() {
         return "Playlist{" + "playlistID=" + playlistID + ", playlistName=" + playlistName + '}';
     }
-    
-    
 }

@@ -34,9 +34,12 @@ public class PlaylistModule {
         this.song = song;
     }
 
-    public void displayPlaylistMenu() {
-        System.out.println(" Playlist Menu");
-        System.out.println("===================");
+    public void displayPlaylistMenu(){
+
+    }
+    public void displayPlaylistOperationMenu() {
+        System.out.println(" Playlist Operations Menu");
+        System.out.println("==========================");
         System.out.println("[1] Display current song playing");
         System.out.println("[2] Skip current song");
         System.out.println("[3] Make song play next");
@@ -45,11 +48,11 @@ public class PlaylistModule {
         System.out.print("Enter your choice: ");
     }
 
-    public void playlistMenu() {
+    public void playlistOperationMenu() {
         Utility.clearScreen();
         displayPlaylist();
         do {
-            displayPlaylistMenu();
+            displayPlaylistOperationMenu();
             int menuChoice = input.nextInt();
             input.nextLine();
             System.out.println();
@@ -105,7 +108,7 @@ public class PlaylistModule {
                             addSong(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                                     songIt.getSongURL()));
                             break;
-                        } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()){
+                        } else if (!songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
                             System.out.println("\n--- Invalid Song ID. Please try again. \n");
                         }
                     }
@@ -115,10 +118,6 @@ public class PlaylistModule {
                 // break;
             }
         } while (true);
-
-    }
-
-    public void displayArtist() {
 
     }
 
@@ -168,4 +167,7 @@ public class PlaylistModule {
 
     }
 
+    public void displayArtist() {
+
+    }
 }

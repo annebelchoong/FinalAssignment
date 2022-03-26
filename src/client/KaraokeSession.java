@@ -97,7 +97,7 @@ public class KaraokeSession {
                             playlist.checkPlaylist();
                             break;
                         } else{
-                            playlist.playlistMenu();
+                            playlist.playlistOperationMenu();
                             break;
                         }
                     case "0": 
