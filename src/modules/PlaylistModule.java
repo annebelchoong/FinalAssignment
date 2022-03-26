@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package modules;
 
 import adt.Annebel.*;
 import entity.*;
@@ -18,18 +18,18 @@ import java.util.TimerTask;
  *
  * @author annebelchoong
  */
-public class PlaylistManagement {
+public class PlaylistModule {
     // private int numberOfSongs;
     Scanner input = new Scanner(System.in);
     QueueInterface<Song> songQueue = new PriorityQueue<>();
     public SongModule songData = new SongModule();
     public Song song;
 
-    public PlaylistManagement() {
+    public PlaylistModule() {
         songData.initSongData();
     }
 
-    public PlaylistManagement(SongModule songData, Song song) {
+    public PlaylistModule(SongModule songData, Song song) {
         this.songData = songData;
         this.song = song;
     }
@@ -101,11 +101,11 @@ public class PlaylistManagement {
                     Iterator<Song> it = songData.songList.getIterator();
                     while (it.hasNext()) {
                         Song songIt = it.next();
-                        if (songChoice.equals(String.valueOf(songIt.songID))) {
+                        if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
                             addSong(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                                     songIt.getSongURL()));
                             break;
-                        } else if (!songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
+                        } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()){
                             System.out.println("\n--- Invalid Song ID. Please try again. \n");
                         }
                     }

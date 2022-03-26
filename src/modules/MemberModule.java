@@ -1,7 +1,8 @@
 
-package entity;
+package modules;
 
 import adt.Guna.*;
+import entity.Member;
 import utility.Utility;
 
 import java.util.Iterator;

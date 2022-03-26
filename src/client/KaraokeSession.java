@@ -6,6 +6,8 @@
 package client;
 
 import entity.*;
+import modules.PlaylistModule;
+import modules.SongModule;
 import utility.Utility;
 
 import java.util.Scanner;
@@ -16,7 +18,7 @@ import java.util.Scanner;
  */
 public class KaraokeSession {
     public static Scanner input = new Scanner(System.in);
-    public static PlaylistManagement playlist = new PlaylistManagement();
+    public static PlaylistModule playlist = new PlaylistModule();
     public static SongModule songLib = new SongModule();
 
     /**

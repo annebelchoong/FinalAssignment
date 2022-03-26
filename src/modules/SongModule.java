@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package modules;
 
 import adt.*;
 import adt.HuiYun.SortedLinkedList;
 import adt.HuiYun.SortedListInterface;
+import entity.Song;
 import utility.Utility;
 
 import java.net.MalformedURLException;

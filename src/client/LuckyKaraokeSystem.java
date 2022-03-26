@@ -1,11 +1,12 @@
 package client;
 
-import entity.MemberModule;
-import entity.ReservationModule;
-import entity.SongModule;
 import utility.Utility;
 
 import java.util.Scanner;
+
+import modules.MemberModule;
+import modules.ReservationModule;
+import modules.SongModule;
 
 /**
  *
