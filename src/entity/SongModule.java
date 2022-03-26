@@ -189,6 +189,7 @@ public class SongModule extends Song {
     }
 
     private void findSongByName() {
+        // viewSongLibrary();
         System.out.println("\nEnter the name of the song:");
         String songName = scanner.nextLine();
 
@@ -285,8 +286,10 @@ public class SongModule extends Song {
                     deleteSong();
                     Utility.cont();
                     break;
-                case "4":
+                    case "4":
+                    Utility.clearScreen();
                     findSongByName();
+                    Utility.cont();
                     break;
                 case "0":
                     exit = true;
