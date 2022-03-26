@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import modules.MemberModule;
 import modules.ReservationModule;
+import modules.RoomModule;
 import modules.SongModule;
 
 /**
@@ -17,6 +18,7 @@ public class LuckyKaraokeSystem {
     public static Scanner input = new Scanner(System.in);
     public static SongModule songList = new SongModule();
     public static MemberModule memberList = new MemberModule();
+    public static RoomModule roomList = new RoomModule();
     public static ReservationModule reservationList = new ReservationModule();
 
     public static void main(String[] args) {
@@ -29,6 +31,7 @@ public class LuckyKaraokeSystem {
     public static void initData() {
         songList.initSongData();
         memberList.initMemberData();
+        roomList.initRoomData();
         reservationList.initReservationData();
     }
 
@@ -47,7 +50,8 @@ public class LuckyKaraokeSystem {
         System.out.println("=======");
         System.out.println("[1] Song Details");
         System.out.println("[2] Member Details");
-        System.out.println("[3] Reservation Details");
+        System.out.println("[3] Room Details");
+        System.out.println("[4] Reservation Details");
         System.out.println("[0] Exit System \n\n");
         System.out.print("Enter your choice: ");
     }
@@ -69,6 +73,9 @@ public class LuckyKaraokeSystem {
                     memberList.memberMenu();
                     break;
                 case "3":
+                    roomList.roomMenu();
+                    break;
+                case "4":
                     reservationList.reservationMenu();
                     break;
                 case "0":
