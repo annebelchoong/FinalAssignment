@@ -2,19 +2,19 @@ package entity;
 
 import java.time.LocalTime;
 
-import adt.YongYang.SortedArrayInterface;
+import adt.YongYang.SortedListInterface;
 /**
  *
  * @author yongyang
  */
 public class TimeSlot implements Comparable<TimeSlot> {
     private LocalTime time;
-    private SortedArrayInterface<Room> roomList;
+    private SortedListInterface<Room> roomList;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(LocalTime time, SortedArrayInterface<Room> roomList) {
+    public TimeSlot(LocalTime time, SortedListInterface<Room> roomList) {
         this.time = time;
         this.roomList = roomList;
     }
@@ -23,11 +23,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
         return this.time;
     }
 
-    public SortedArrayInterface<Room> getRoomList() {
+    public SortedListInterface<Room> getRoomList() {
         return this.roomList;
     }
 
-    public void setRoomList(SortedArrayInterface<Room> roomList) {
+    public void setRoomList(SortedListInterface<Room> roomList) {
         this.roomList = roomList;
     }
 

@@ -4,7 +4,7 @@ package adt.YongYang;
  *
  * @author yongyangboon
  */
-public interface SortedArrayInterface<T extends Comparable<T>> {
+public interface SortedListInterface<T extends Comparable<T>> {
 
     public void add(T newEntry);
 

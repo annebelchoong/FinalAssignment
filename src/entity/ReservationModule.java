@@ -4,8 +4,8 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 import adt.YongYang.SortedArrayList;
-import adt.YongYang.SortedArrayInterface;
-import adt.Guna.SortedListInterface;
+import adt.YongYang.SortedListInterface;
+// import adt.Guna.SortedListInterface;
 import utility.Utility;
 
 /**
@@ -19,11 +19,11 @@ public class ReservationModule {
 
     // public static ReservationModule rDriver = new ReservationModule();
 
-    public SortedArrayInterface<Room> roomList = new SortedArrayList<>();
-    public SortedArrayInterface<TimeSlot> timeSlots = new SortedArrayList<>();
-    public SortedArrayInterface<Reservation> reservationList = new SortedArrayList<>();
+    public SortedListInterface<Room> roomList = new SortedArrayList<>();
+    public SortedListInterface<TimeSlot> timeSlots = new SortedArrayList<>();
+    public SortedListInterface<Reservation> reservationList = new SortedArrayList<>();
 
-    public static SortedListInterface<Member> memberList = MemberModule.getMemberList();
+    public static SortedListInterface<Member> memberList = (SortedListInterface<Member>) MemberModule.getMemberList();
 
     public ReservationModule() {
         // this.reserveList = reserveList;
