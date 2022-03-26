@@ -5,6 +5,8 @@
  */
 package adt.Annebel;
 
+import java.util.Iterator;
+
 /**
  *
  * @author annebelchoong
@@ -12,10 +14,12 @@ package adt.Annebel;
 public interface QueueInterface<T extends Comparable<T>> {
     public void insert(T newEntry);
     public void makeFirst(T anEntry);
-    public void shiftPriority();
+    // public void shiftPriority();
     public T removeMin();
     public T peekMin();
+    public T peekMax();
     public boolean contains(T anEntry);
     public boolean isEmpty();
     public void clear();
+    Iterator<T> getIterator();
 }

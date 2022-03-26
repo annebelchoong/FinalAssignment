@@ -5,6 +5,8 @@
  */
 package adt.Annebel;
 
+import java.util.Iterator;
+
 /**
  *
  * @author annebelchoong
@@ -65,14 +67,14 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     }
 
     
-    @Override
-    public void shiftPriority() {
-        PriorityNode<T> currentNode = firstNode;
-        while (!isEmpty()) {
-            currentNode = currentNode.next;
-            currentNode.priority++; 
-        }
-    }
+    // @Override
+    // public void shiftPriority() {
+    //     PriorityNode<T> currentNode = firstNode;
+    //     while (!isEmpty()) {
+    //         currentNode = currentNode.next;
+    //         currentNode.priority++; 
+    //     }
+    // }
     
     @Override
     public T removeMin() {
@@ -98,6 +100,16 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
             front = firstNode.data;
         }
         return front;
+    }
+
+    @Override
+    public T peekMax(){
+        T back = null;
+
+        if(!isEmpty()){
+            back = lastNode.data;
+        }
+        return back;
     }
 
     @Override
@@ -141,14 +153,33 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
         return outputStr;
     }
     
-    public void transverse(T anEntry){
-        PriorityNode<T> currentNode = firstNode;
-        while (currentNode != null){
-            anEntry.equals(currentNode.data);
-            System.out.print(currentNode.data);
-            currentNode = currentNode.next;
-        }
+    @Override
+    public Iterator<T> getIterator(){
+        return new QueueIterator();
     }
+
+    public class QueueIterator implements Iterator<T>{
+        private PriorityNode<T> currentNode = firstNode;
+
+        @Override
+        public boolean hasNext() {
+            return currentNode!= null;
+        }
+
+        @Override
+        public T next() {
+            T currentData = null;
+            if (hasNext()){
+                currentData = currentNode.data;
+                currentNode = currentNode.next;
+            }
+            return currentData;
+        }
+
+
+
+    }
+
     
     
 //    public int getPriority(T anEntry){

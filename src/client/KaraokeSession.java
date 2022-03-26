@@ -27,7 +27,7 @@ public class KaraokeSession {
     public static void main(String[] args) {
         Utility.clearScreen();
         welcome();
-        // initData();
+        initData();
         startSession();
 
         // QueueInterface<Song> songQueue = new PriorityQueue<>();
@@ -62,27 +62,35 @@ public class KaraokeSession {
         System.out.println();
     }
 
-    public static void homeMenu() {
+    // public static void homeMenu() {
 
-        System.out.println(" M   E   N   U");
-        System.out.println("===============");
-        System.out.println("[1] Select song");
-        System.out.println("[2] Display playlist");
-        System.out.println("[0] Exit Sesion\n\n");
-        System.out.print("Enter your choice: ");
-    }
-
-    // public static void initData() {
-    //     songLib.addSong(new Song(1111, "Party Rock Anthem", "LMAO", "https://www.youtube.com/watch v=0WM9Amg7F5s"));
-    //     songLib.addSong(new Song(2222, "On the Ground", "LMAO", "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-
+    //     System.out.println(" M   E   N   U");
+    //     System.out.println("===============");
+    //     System.out.println("[1] Select song");
+    //     System.out.println("[2] Select playlist");
+    //     System.out.println("[3] Display song queue");
+    //     System.out.println("[0] Exit Sesion\n\n");
+    //     System.out.print("Enter your choice: ");
     // }
+
+    public static void initData() {
+       playlist.initPlaylistData();
+       playlist.initSongData();
+       playlist.initPlaylistSongData();
+    }
 
     public static void startSession() {
         boolean isQuit = false;
         do {
                 // Utility.clearScreen();
-                homeMenu();
+                // homeMenu();
+                System.out.println(" M   E   N   U");
+                System.out.println("===============");
+                System.out.println("[1] Select song");
+                System.out.println("[2] Playlist");
+                System.out.println("[3] Display song queue");
+                System.out.println("[0] Exit Sesion\n\n");
+                System.out.print("Enter your choice: ");
                 String menuChoice = input.nextLine();
                 System.out.println();
                 System.out.println();
@@ -92,12 +100,15 @@ public class KaraokeSession {
                         // Utility.cont();
                         break;
                     case "2":
+                        playlist.playlistMenu();
+                        break;
+                    case "3":
                         Utility.clearScreen();
-                        if (playlist.emptyPlaylist()){
-                            playlist.checkPlaylist();
+                        if (playlist.emptySongQueue()){
+                            playlist.checkSongQueue();
                             break;
                         } else{
-                            playlist.playlistOperationMenu();
+                            playlist.songQueueMenu();
                             break;
                         }
                     case "0": 

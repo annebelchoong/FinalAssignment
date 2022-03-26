@@ -5,6 +5,7 @@
  */
 package entity;
 
+import adt.Annebel.*;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Objects;
 public class Playlist implements Comparable<Playlist>{
     private int playlistID;
     private String playlistName;
+    private QueueInterface songList;
 
     public Playlist() {
     }
@@ -21,6 +23,12 @@ public class Playlist implements Comparable<Playlist>{
     public Playlist(int playlistID, String playlistName) {
         this.playlistID = playlistID;
         this.playlistName = playlistName;
+    }
+
+    public Playlist(int playlistID, String playlistName, QueueInterface songList) {
+        this.playlistID = playlistID;
+        this.playlistName = playlistName;
+        this.songList = songList;
     }
 
     public int getPlaylistID() {
@@ -39,27 +47,52 @@ public class Playlist implements Comparable<Playlist>{
         this.playlistName = playlistName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Playlist)) {
-            return false;
-        }
-        Playlist playlist = (Playlist) o;
-        return playlistID == playlist.playlistID && Objects.equals(playlistName, playlist.playlistName);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(playlistID, playlistName);
-    }
-    
-    @Override
-    public String toString() {
-        return "Playlist{" + "playlistID=" + playlistID + ", playlistName=" + playlistName + '}';
+    public QueueInterface getSongList() {
+        return songList;
     }
 
+    public void setSongList(QueueInterface songList) {
+        this.songList = songList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.playlistID;
+        hash = 83 * hash + Objects.hashCode(this.playlistName);
+        hash = 83 * hash + Objects.hashCode(this.songList);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Playlist other = (Playlist) obj;
+        if (this.playlistID != other.playlistID) {
+            return false;
+        }
+        if (!Objects.equals(this.playlistName, other.playlistName)) {
+            return false;
+        }
+        if (!Objects.equals(this.songList, other.songList)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-15s %-15s",playlistID, playlistName); 
+    }
+   
     @Override
     public int compareTo(Playlist p) {
         return (int)(this.playlistID - p.playlistID);

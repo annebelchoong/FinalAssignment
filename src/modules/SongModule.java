@@ -242,8 +242,7 @@ public class SongModule extends Song {
         songList.add(new Song(1002, "This Is Me", "Keala Settle", "https://atlantic.lnk.to/TheGreatestShowman"));
         songList.add(new Song(1003, "Our Song", "Taylor Swift", "https://youtu.be/7rwnZdbXtTM"));
         songList.add(new Song(1004, "I am What I am", "Gloria Gaynor", "https://youtu.be/MnGouhet2HQ"));
-        songList.add(
-                new Song(1005, "Hall of Fame", "The Script", "http://smarturl.it/TheScriptSpotify?IQid=ScriptHOF"));
+        songList.add(new Song(1005, "Hall of Fame", "The Script", "http://smarturl.it/TheScriptSpotify?IQid=ScriptHOF"));
         songList.add(new Song(1006, "No Time at All", "Martha Raye", "https://youtu.be/jIfAGN6o3Jg"));
         songList.add(new Song(1007, "FightSong", "Rachel Platten", "https://www.youtube.com/watch?v=XbxNtPiCBK8"));
     }
