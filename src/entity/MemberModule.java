@@ -43,6 +43,8 @@ public class MemberModule extends Member {
         int points = scanner.nextInt();
 
         memList.add(new Member(id, name, email, points));
+
+        System.out.println("\nMember \"" + name + "\" is added");
     }
 
     public void deleteMember() {
@@ -58,8 +60,12 @@ public class MemberModule extends Member {
 
             if (member.getMemberId() == id) {
                 memList.remove(member);
+                System.out.println("\nMember \""+ member.getMemberName()+ "\" has been removed. ");
+                break;
             }
+
         }
+
     }
 
     public void chooseMember() {
@@ -104,10 +110,10 @@ public class MemberModule extends Member {
         }
 
         System.out.println("---------Highest points---------");
-        System.out.println("Member ID: " + maxid);
-        System.out.println("Member Name: " + maxName);
-        System.out.println("Member Email: " + maxEmail);
-        System.out.println("Member Points: " + max);
+        System.out.println("Member ID: \t" + maxid);
+        System.out.println("Member Name: \t" + maxName);
+        System.out.println("Member Email: \t" + maxEmail);
+        System.out.println("Member Points: \t" + max);
     }
 
     public void lowestPoints() {
@@ -130,10 +136,10 @@ public class MemberModule extends Member {
         }
 
         System.out.println("---------Lowest points---------");
-        System.out.println("Member ID: " + minid);
-        System.out.println("Member Name: " + minName);
-        System.out.println("Member Email: " + minEmail);
-        System.out.println("Member Points: " + min);
+        System.out.println("Member ID: \t" + minid);
+        System.out.println("Member Name: \t" + minName);
+        System.out.println("Member Email: \t" + minEmail);
+        System.out.println("Member Points: \t" + min);
         System.out.print("\n");
     }
 
@@ -153,9 +159,10 @@ public class MemberModule extends Member {
         while (ite.hasNext()) {
             Member mem = ite.next();
             System.out.printf("%-15d %-15s %-23s %-15d\n", mem.getMemberId(), mem.getMemberName(), mem.getEmail(),
-                    mem.getPoints());
+            mem.getPoints());
         }
-
+        
+        System.out.println("---------------------------------------------------------------------");
         System.out.println("\nTotal Members: " + memList.getNumberOfEntries());
     }
 
@@ -163,9 +170,9 @@ public class MemberModule extends Member {
         // System.out.println("Choose the following options to run: ");
         System.out.println("Member Module Menu");
         System.out.println("====================");
-        System.out.println("[1] View member list");
-        System.out.println("[2] Add new member information");
-        System.out.println("[3] Delete member information");
+        System.out.println("[1] Display member list");
+        System.out.println("[2] Add new member");
+        System.out.println("[3] Delete a member");
         System.out.println("[4] Select a member");
         System.out.println("[5] Select member with highest points");
         System.out.println("[6] Select member with lowest points");
@@ -185,25 +192,29 @@ public class MemberModule extends Member {
             System.out.println();
             switch (input) {
                 case "1":
-                viewMember();
-                Utility.cont();
-                break;
-                case "2":
-                addMember();
-                break;
-                case "3":
-                deleteMember();
-                break;
+                    viewMember();
+                    Utility.cont();
+                    break;
+                    case "2":
+                    addMember();
+                    Utility.cont();
+                    break;
+                    case "3":
+                    deleteMember();
+                    Utility.cont();
+                    break;
                 case "4":
                     Utility.clearScreen();
                     chooseMember();
                     Utility.cont();
                     break;
-                case "5":
+                    case "5":
                     highestPoints();
+                    Utility.cont();
                     break;
-                case "6":
+                    case "6":
                     lowestPoints();
+                    Utility.cont();
                     break;
                 case "0":
                     exit = true;
