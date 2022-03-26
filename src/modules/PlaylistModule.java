@@ -33,19 +33,20 @@ public class PlaylistModule {
     }
 
     public void playlistMenu() {
-        Utility.clearScreen();
         do {
+            Utility.clearScreen();
             System.out.println("Playlist Menu");
             System.out.println("==============");
             System.out.println("[1] Create playlist");
             System.out.println("[2] Select playlist");
             System.out.println("[0] Back\n\n");
-            System.out.println("Enter your choice: ");
+            System.out.print("Enter your choice: ");
             String menuChoice = input.nextLine();
             System.out.println();
             System.out.println();
             switch (menuChoice) {
                 case "1":
+                    Utility.clearScreen();
                     createPlaylist();
                     Utility.cont();
                     break;
@@ -55,9 +56,9 @@ public class PlaylistModule {
                     System.out.print("Enter playlist ID to select playlist: ");
                     String playlistChoice = input.nextLine();
                     promptSelectPlaylist(playlistChoice);
-                    // songQueueMenu();
                     break;
                 case "0":
+                    Utility.clearScreen();
                     return;
                 default:
                     System.out.println("Invalid input. Please try again.");
@@ -65,19 +66,20 @@ public class PlaylistModule {
         } while (true);
     }
 
-    public void playSongMenu(){
+    public void playSongMenu(QueueInterface<Song> songList) {
         System.out.println("[1] Play Songs from playlist");
-        System.out.println("[0] Back");
-        System.out.println("Enter your choice: ");
+        System.out.println("[0] Back\n\n");
+        System.out.print("Enter your choice: ");
         String menuChoice = input.nextLine();
-        switch(menuChoice){
+        switch (menuChoice) {
             case "1":
-            
-            break;
+                addSongFromPlaylist(songList);
+                Utility.cont();
+                break;
             case "0":
-            return;
+                return;
 
-        } 
+        }
     }
 
     public void initPlaylistSongData() {
@@ -125,6 +127,7 @@ public class PlaylistModule {
                     Song songIt = it.next();
                     if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
                         songList4.insert(songIt);
+                        System.out.println("\n--- Song \"" + songIt.getSongName() + "\" has added to playlist!\n");
 
                         break;
                     } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()) {
@@ -137,6 +140,8 @@ public class PlaylistModule {
 
         System.out.println("\nNew playlist \"" + playlistName + "\" is created!\n");
 
+        playSongMenu(songList4);
+
     }
 
     public void displayPlaylists() {
@@ -145,7 +150,7 @@ public class PlaylistModule {
         System.out.print("---------------------------------------------\n\n");
     }
 
-    public void displayPlaylistSong(String songName, QueueInterface<Song> songList) {
+    public void displayPlaylistSong(String songName, QueueInterface<Song> songList4) {
         // boolean isFound = false;
         // Iterator<Playlist> it = playlist.getIterator();
         // do{
@@ -169,15 +174,24 @@ public class PlaylistModule {
         System.out.println(songName + " PlayList");
         System.out.println("");
         Utility.songlistHeader();
-        System.out.print(songList);
+        System.out.print(songList4);
         System.out.print(
                 "--------------------------------------------------------------------------------------------------------------\n\n");
 
     }
 
+    public void addSongFromPlaylist(QueueInterface<Song> songList) {
+        Iterator<Song> s = songList.getIterator();
+        while (s.hasNext()) {
+            Song songs = s.next();
+            addSong(songs);
+        }
+    }
+
     public void promptSelectPlaylist(String choice) {
 
         boolean isFound = false;
+        QueueInterface<Song> songList = new PriorityQueue<>();
         Iterator<Playlist> it = playlist.getIterator();
         do {
             while (it.hasNext()) {
@@ -186,6 +200,7 @@ public class PlaylistModule {
                     System.out.println("\nPlaylist \'" + playlistIt.getPlaylistName() + "\" is selected!\n\n");
                     // System.out.println(playlistIt.getSongList());
                     displayPlaylistSong(playlistIt.getPlaylistName(), playlistIt.getSongList());
+                    songList = playlistIt.getSongList();
                     isFound = true;
                     break;
 
@@ -195,6 +210,8 @@ public class PlaylistModule {
                 }
             }
         } while (!isFound);
+
+        playSongMenu(songList);
     }
 
     // select song from all song available
@@ -231,9 +248,8 @@ public class PlaylistModule {
 
     // song queue methods
     public void songQueueMenu() {
-        Utility.clearScreen();
-        displaySongQueue();
         do {
+            displaySongQueue();
             System.out.println(" Song Queue Menu");
             System.out.println("=================");
             System.out.println("[1] Display current song playing");
@@ -250,18 +266,21 @@ public class PlaylistModule {
                 case 1:
                     currentSongPlaying();
                     Utility.cont();
+                    Utility.clearScreen();
                     break;
                 case 2:
                     skipSong();
                     Utility.cont();
                     break;
                 case 3:
-                    // playNext();
+                    playNext();
+                    Utility.cont();
                     break;
                 case 4:
                     // deleteSong();
                     break;
                 case 0:
+                    Utility.clearScreen();
                     return;
             }
         } while (true);
@@ -301,35 +320,78 @@ public class PlaylistModule {
             public void run() {
                 songQueue.removeMin();
             }
-        }, (1 / 2) * 60 * 1000);
+        }, 1 * 60 * 1000);
     }
 
     public void currentSongPlaying() {
-        System.out.print("Song playing now: ");
-        System.out.println(songQueue.removeMin().getSongName());
-        displayNextSong();
+        if (songQueue.isEmpty()) {
+            System.out.println("Your playlist is empty. \n\n");
+            return;
+        } else {
+            System.out.print("Song playing now: ");
+            System.out.println(songQueue.removeMin().getSongName());
+            displayNextSong();
+        }
     }
 
     public void displayNextSong() {
-
-        System.out.print("\nNext Song in Queue: ");
-        System.out.println(songQueue.peekMin().getSongName());
+        if (songQueue.peekMin() == null) {
+            System.out.println("The song playing is the last song in the playlist.");
+        } else {
+            System.out.print("\nNext Song in Queue: ");
+            System.out.println(songQueue.peekMin().getSongName());
+        }
     }
 
-    public Song skipSong() {
+    public void skipSong() {
         // songQueue.removeMin();
-        return songQueue.removeMin();
+        songQueue.removeMin();
+        displaySongQueue();
+        currentSongPlaying();
     }
 
-    public void playNext(Song song) {
-        songQueue.makeFirst(song);
+    public void playNext() {
+        displaySongQueue();
+        boolean isFound = false;
+        do {
+            System.out.println("Which song would you want to play next? \n");
+            System.out.println("Enter the song ID of the song: ");
+            String songChoice = input.nextLine();
+            Iterator<Song> it = songData.songList.getIterator();
+            while (it.hasNext()) {
+                Song songIt = it.next();
+                if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
+                    songQueue.makeFirst(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
+                            songIt.getSongURL()));
+                    isFound = true;
+                    break;
+                } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()) {
+                    System.out.println("\n--- Invalid Song ID. Please try again. \n");
+                }
+            }
+        } while (!isFound);
     }
 
-    public void deleteSong(String song) {
-
+    public void deleteSong() {
+        displaySongQueue();
+        boolean isFound = false;
+        do {
+            System.out.println("Which song would you want to delete from song Queue? \n");
+            System.out.println("Enter the song ID of the song: ");
+            String songChoice = input.nextLine();
+            Iterator<Song> it = songData.songList.getIterator();
+            while (it.hasNext()) {
+                Song songIt = it.next();
+                if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
+                    songQueue.makeFirst(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
+                            songIt.getSongURL()));
+                    isFound = true;
+                    break;
+                } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()) {
+                    System.out.println("\n--- Invalid Song ID. Please try again. \n");
+                }
+            }
+        } while (!isFound);
     }
 
-    public void displayArtist() {
-
-    }
 }

@@ -82,7 +82,6 @@ public class KaraokeSession {
     public static void startSession() {
         boolean isQuit = false;
         do {
-                // Utility.clearScreen();
                 // homeMenu();
                 System.out.println(" M   E   N   U");
                 System.out.println("===============");
