@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author annebelchoong
  */
-public class Playlist {
+public class Playlist implements Comparable<Playlist>{
     private int playlistID;
     private String playlistName;
 
@@ -59,4 +59,11 @@ public class Playlist {
     public String toString() {
         return "Playlist{" + "playlistID=" + playlistID + ", playlistName=" + playlistName + '}';
     }
+
+    @Override
+    public int compareTo(Playlist p) {
+        return (int)(this.playlistID - p.playlistID);
+    }
+
+
 }
