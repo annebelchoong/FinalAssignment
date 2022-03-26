@@ -5,7 +5,9 @@
  */
 package entity;
 
-import adt.HuiYun.*;
+import adt.*;
+import adt.HuiYun.SortedLinkedList;
+import adt.HuiYun.SortedListInterface;
 import utility.Utility;
 
 import java.net.MalformedURLException;
