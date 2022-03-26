@@ -35,8 +35,20 @@ public class PlaylistModule {
     }
 
     public void displayPlaylistMenu(){
-
+        System.out.println("Playlist Menu");
+        System.out.println("==============");
+        System.out.println("[1] Create playlist");
+        System.out.println("[2] Select playlist");
+        System.out.println("[0] Back");
     }
+
+    public void playlistMenu(){
+        do{
+            displayPlaylistMenu();
+
+        } while(true);
+    }
+
     public void displayPlaylistOperationMenu() {
         System.out.println(" Playlist Operations Menu");
         System.out.println("==========================");
