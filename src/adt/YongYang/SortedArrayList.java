@@ -1,6 +1,6 @@
 package adt.YongYang;
 
-public class SortedArrayList<T extends Comparable<T>> implements SortedArrayInterface<T> {
+public class SortedArrayList<T extends Comparable<T>> implements SortedListInterface<T> {
 
     private T[] array;
     private int numberOfEntries;
