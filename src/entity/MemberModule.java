@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class MemberModule extends Member {
 
     Scanner scanner = new Scanner(System.in);
-    SortedListInterface<Member> memList = new SortedLinkedList<>();
+    static SortedListInterface<Member> memberList = new SortedLinkedList<>();
 
     public MemberModule(int MemberId, String MemberName, String Email, int numberOfPoints) {
         super(MemberId, MemberName, Email, numberOfPoints);
@@ -22,6 +22,10 @@ public class MemberModule extends Member {
 
     public MemberModule() {
 
+    }
+
+    public static SortedListInterface<Member> getMemberList() {
+        return memberList;
     }
 
     public void errorMessage() {
@@ -42,7 +46,7 @@ public class MemberModule extends Member {
         System.out.print("Member Points: ");
         int points = scanner.nextInt();
 
-        memList.add(new Member(id, name, email, points));
+        memberList.add(new Member(id, name, email, points));
 
         System.out.println("\nMember \"" + name + "\" is added");
     }
@@ -53,14 +57,14 @@ public class MemberModule extends Member {
         System.out.print("Member Id: ");
         int id = scanner.nextInt();
 
-        Iterator<Member> m = memList.getIterator();
+        Iterator<Member> m = memberList.getIterator();
 
         while (m.hasNext()) {
             Member member = m.next();
 
             if (member.getMemberId() == id) {
-                memList.remove(member);
-                System.out.println("\nMember \""+ member.getMemberName()+ "\" has been removed. ");
+                memberList.remove(member);
+                System.out.println("\nMember \"" + member.getMemberName() + "\" has been removed. ");
                 break;
             }
 
@@ -74,7 +78,7 @@ public class MemberModule extends Member {
         System.out.print("Member Id: ");
         int id = scanner.nextInt();
 
-        Iterator<Member> m = memList.getIterator();
+        Iterator<Member> m = memberList.getIterator();
 
         while (m.hasNext()) {
             Member member = m.next();
@@ -92,7 +96,7 @@ public class MemberModule extends Member {
 
     public void highestPoints() {
 
-        Iterator<Member> m = memList.getIterator();
+        Iterator<Member> m = memberList.getIterator();
         int max = 0;
         int maxid = 0;
         String maxName = "";
@@ -118,7 +122,7 @@ public class MemberModule extends Member {
 
     public void lowestPoints() {
 
-        Iterator<Member> m = memList.getIterator();
+        Iterator<Member> m = memberList.getIterator();
         int min = 9999;
         int minid = 0;
         String minName = "";
@@ -144,26 +148,26 @@ public class MemberModule extends Member {
     }
 
     public void initMemberData() {
-        memList.add(new Member(101, "John", "john@gmail.com", 1000));
-        memList.add(new Member(102, "Joseph", "joseph@gmail.com", 1200));
-        memList.add(new Member(103, "Joshua", "joshua@gmail.com", 500));
-        memList.add(new Member(104, "Jack", "jack@gmail.com", 900));
-        memList.add(new Member(105, "Jill", "jill@gmail.com", 2000));
-        memList.add(new Member(106, "Jim", "jim@gmail.com", 2500));
+        memberList.add(new Member(101, "John", "john@gmail.com", 1000));
+        memberList.add(new Member(102, "Joseph", "joseph@gmail.com", 1200));
+        memberList.add(new Member(103, "Joshua", "joshua@gmail.com", 500));
+        memberList.add(new Member(104, "Jack", "jack@gmail.com", 900));
+        memberList.add(new Member(105, "Jill", "jill@gmail.com", 2000));
+        memberList.add(new Member(106, "Jim", "jim@gmail.com", 2500));
     }
 
     public void viewMember() {
-        Iterator<Member> ite = memList.getIterator();
+        Iterator<Member> ite = memberList.getIterator();
         System.out.println("Member ID\tMember Name\tMember Email\t\tMember Points");
         System.out.println("---------------------------------------------------------------------");
         while (ite.hasNext()) {
             Member mem = ite.next();
             System.out.printf("%-15d %-15s %-23s %-15d\n", mem.getMemberId(), mem.getMemberName(), mem.getEmail(),
-            mem.getPoints());
+                    mem.getPoints());
         }
-        
+
         System.out.println("---------------------------------------------------------------------");
-        System.out.println("\nTotal Members: " + memList.getNumberOfEntries());
+        System.out.println("\nTotal Members: " + memberList.getNumberOfEntries());
     }
 
     public void displayMemberMenu() {
@@ -195,11 +199,11 @@ public class MemberModule extends Member {
                     viewMember();
                     Utility.cont();
                     break;
-                    case "2":
+                case "2":
                     addMember();
                     Utility.cont();
                     break;
-                    case "3":
+                case "3":
                     deleteMember();
                     Utility.cont();
                     break;
@@ -208,11 +212,11 @@ public class MemberModule extends Member {
                     chooseMember();
                     Utility.cont();
                     break;
-                    case "5":
+                case "5":
                     highestPoints();
                     Utility.cont();
                     break;
-                    case "6":
+                case "6":
                     lowestPoints();
                     Utility.cont();
                     break;
