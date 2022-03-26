@@ -93,6 +93,27 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     }
 
     @Override
+    public void remove(T anEntry){
+        PriorityNode<T> nodeBefore = null;
+        PriorityNode<T> currentNode = firstNode;
+        while(currentNode!= null && anEntry.compareTo((T)currentNode.data)!= 0){
+        currentNode.priority--;
+            nodeBefore = currentNode;
+            currentNode = currentNode.next;
+            if(currentNode!= null && anEntry.compareTo((T)currentNode.data)== 0){
+                    currentNode.priority = 1;
+                if(currentNode == firstNode){
+                    insert(anEntry);
+                } else{
+                    nodeBefore.next = currentNode.next;
+                    currentNode.next = firstNode;
+                    firstNode = currentNode;
+//                        currentNode.next.priority ++;
+                }
+            }
+    }
+
+    @Override
     public T peekMin() {
                 T front = null;
         

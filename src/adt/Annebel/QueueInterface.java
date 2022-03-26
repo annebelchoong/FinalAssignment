@@ -16,6 +16,7 @@ public interface QueueInterface<T extends Comparable<T>> {
     public void makeFirst(T anEntry);
     // public void shiftPriority();
     public T removeMin();
+    public void remove(T anEntry);
     public T peekMin();
     public T peekMax();
     public boolean contains(T anEntry);
