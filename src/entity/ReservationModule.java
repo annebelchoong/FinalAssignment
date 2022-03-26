@@ -32,7 +32,7 @@ public class ReservationModule {
 
     }
 
-    public void startReservationMenu() {
+    public void reservationMenu() {
         while (toContinue) {
             toMainMenu = true;
             switch (showMainMenu()) {
@@ -96,8 +96,6 @@ public class ReservationModule {
 
         reservationList.add(new Reservation(10001, roomList.getEntry(1), memberList.getEntry(1)));
         reservationList.add(new Reservation(10002, roomList.getEntry(2), memberList.getEntry(2)));
-
-        viewRoomStatus();
 
     }
 
