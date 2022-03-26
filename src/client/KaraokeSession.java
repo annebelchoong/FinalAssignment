@@ -90,9 +90,14 @@ public class KaraokeSession {
                         // Utility.cont();
                         break;
                     case "2":
-                        // playlist.displayPlaylist();
-                        playlist.playlistMenu();
-                        break;
+                        Utility.clearScreen();
+                        if (playlist.emptyPlaylist()){
+                            playlist.checkPlaylist();
+                            break;
+                        } else{
+                            playlist.playlistMenu();
+                            break;
+                        }
                     case "0": 
                         isQuit = true;
                         break;

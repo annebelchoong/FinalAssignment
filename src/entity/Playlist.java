@@ -11,6 +11,8 @@ import utility.Utility;
 
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -35,7 +37,7 @@ public class Playlist {
     public void displayPlaylistMenu() {
         System.out.println(" Playlist Menu");
         System.out.println("===================");
-        System.out.println("[1] Play Song from queue");
+        System.out.println("[1] Display current song playing");
         System.out.println("[2] Skip current song");
         System.out.println("[3] Make song play next");
         System.out.println("[4] Delete Song from queue");
@@ -54,7 +56,8 @@ public class Playlist {
             System.out.println();
             switch (menuChoice) {
                 case 1:
-                    playSong();
+                    currentSongPlaying();
+                    Utility.cont();
                     break;
                 case 2:
                     break;
@@ -67,6 +70,20 @@ public class Playlist {
             }
         } while (true);
 
+    }
+
+    public boolean emptyPlaylist(){
+        return songQueue.isEmpty();
+    }
+
+    public void checkPlaylist(){
+        if (songQueue.isEmpty()){
+            System.out.println("Your playlist is empty. \n\n");
+            return;
+        } else{
+            displayPlaylist();
+            playSong();
+        }
     }
 
     public void promptSelectSong() {
@@ -88,7 +105,7 @@ public class Playlist {
                             addSong(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                                     songIt.getSongURL()));
                             break;
-                        } else if (songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
+                        } else if (!songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
                             System.out.println("\n--- Invalid Song ID. Please try again. \n");
                         }
                     }
@@ -116,16 +133,31 @@ public class Playlist {
         Utility.songlistHeader();
         System.out.println(songQueue);
     }
-
-    public void playSong() {
+    
+    public void playSong(){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run(){
+                songQueue.removeMin();
+            }
+        }, (1/2)*60*1000);
+    }
+    public void currentSongPlaying() {
         System.out.print("Song playing now: ");
-        // System.out.println(songQueue.removeMin().getSongName());
+        System.out.println(songQueue.removeMin().getSongName());
+        displayNextSong();
+    }
+
+    public void displayNextSong(){
+
+        System.out.print("\nNext Song in Queue: ");
+        System.out.println(songQueue.peekMin().getSongName());
     }
 
     public Song skipSong() {
         // songQueue.removeMin();
         return songQueue.removeMin();
-
     }
 
     public void playNext(Song song) {
