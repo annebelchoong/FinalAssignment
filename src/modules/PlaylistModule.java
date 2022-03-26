@@ -120,7 +120,7 @@ public class PlaylistModule {
                             addSong(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                                     songIt.getSongURL()));
                             break;
-                        } else if (!songChoice.equals(String.valueOf(songIt.songID)) && !it.hasNext()){
+                        } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()){
                             System.out.println("\n--- Invalid Song ID. Please try again. \n");
                         }
                     }
