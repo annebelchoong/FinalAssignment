@@ -207,14 +207,14 @@ public class SongModule extends Song {
     }
 
     private void displayMenu() {
-        System.out.println();
-        System.out.println("Playlist Operations");
-        System.out.println("=====================");
+        // System.out.println();
+        System.out.println("Song Module Menu");
+        System.out.println("================");
         System.out.println("[1] Display playlist");
         System.out.println("[2] Delete a song from playlist");
         System.out.println("[3] Find a song by name");
         System.out.println("[4] Add a song to the playlist");
-        System.out.println("[5] Return to Main Menu");
+        System.out.println("[0] Return to Main Menu");
         // System.out.println("[6] Get song");
         System.out.println();
     }
@@ -224,10 +224,10 @@ public class SongModule extends Song {
         boolean exit = false;
         // Song song = new Song();
 
-        while (!exit) {
+       do{
             Utility.clearScreen();
             displayMenu();
-            System.out.print("Enter menu option: ");
+            System.out.print("Enter your choice: ");
             String input = scanner.nextLine();
             System.out.println();
             System.out.println();
@@ -247,7 +247,7 @@ public class SongModule extends Song {
                 case "4":
                     addSong();
                     break;
-                case "5":
+                case "0":
                     exit = true;
                     Utility.clearScreen();
                     break;
@@ -259,7 +259,7 @@ public class SongModule extends Song {
                 // Utility.cont();
                 // break;
             }
-        }
+        } while(!exit);
     }
 
     // public static void SongPlaylist() {

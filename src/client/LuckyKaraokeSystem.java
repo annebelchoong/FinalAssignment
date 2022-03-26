@@ -5,6 +5,7 @@
  */
 package client;
 
+import entity.MemberModule;
 import entity.SongModule;
 import utility.Utility;
 
@@ -18,6 +19,7 @@ public class LuckyKaraokeSystem {
 
     public static Scanner input = new Scanner(System.in);
     public static SongModule songList = new SongModule();
+    public static MemberModule memberList = new MemberModule();
 
     public static void main(String[] args) {
         Utility.clearScreen();
@@ -28,6 +30,7 @@ public class LuckyKaraokeSystem {
 
     public static void initData() {
         songList.initSongData();
+        memberList.initMemberData();
     }
 
     public static void welcome(){
@@ -46,7 +49,7 @@ public class LuckyKaraokeSystem {
         System.out.println("[1] Song Details");
         System.out.println("[2] Member Details");
         System.out.println("[3] Reservation Details");
-        System.out.println("[4] Exit System \n\n");
+        System.out.println("[0] Exit System \n\n");
         System.out.print("Enter your choice: ");
     }
 
@@ -64,10 +67,11 @@ public class LuckyKaraokeSystem {
                     songList.songLibraryMenu();
                     break;
                 case "2":
+                    memberList.memberMenu();
                     break;
                 case "3":
                     break;
-                case "4":
+                case "0":
                     System.out.println("Exiting System........");
                     isQuit = true;
                     break;

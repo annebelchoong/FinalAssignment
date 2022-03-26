@@ -1,7 +1,7 @@
 
 package client;
 
-import entity.MemberList;
+import entity.MemberModule;
 import entity.Message;
 import java.util.*;
 
@@ -14,12 +14,12 @@ public class AdminMemberDriver  {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        MemberList member = new MemberList();
+        MemberModule member = new MemberModule();
         int input;
         
         Message.MessageMenu();
         input = scanner.nextInt();
-        member.rawData();
+        member.initMemberData();
         
         do{
           if(input == 1){
