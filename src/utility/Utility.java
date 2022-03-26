@@ -41,4 +41,13 @@ public class Utility {
         } catch (Exception e) {
         }
     }
+
+    public static String printHeaderLines() {
+        return "\n" + "=".repeat(50) + "\n";
+    }
+
+    public static String printLines() {
+        return "\n" + "-".repeat(50) + "\n";
+    }
+
 }
