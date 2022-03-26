@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class KaraokeSession {
     public static Scanner input = new Scanner(System.in);
-    public static Playlist playlist = new Playlist();
+    public static PlaylistManagement playlist = new PlaylistManagement();
     public static SongModule songLib = new SongModule();
 
     /**
