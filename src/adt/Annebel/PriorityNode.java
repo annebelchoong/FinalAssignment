@@ -13,7 +13,7 @@ public class PriorityNode<T>{
     
     int priority;
     T data;
-    PriorityNode next;
+    PriorityNode<T> next;
 
     public PriorityNode() {
     }
@@ -28,7 +28,7 @@ public class PriorityNode<T>{
     }
     
     
-    public PriorityNode(int priority, T data, PriorityNode next) {
+    public PriorityNode(int priority, T data, PriorityNode<T> next) {
         this.priority = priority;
         this.data = data;
         this.next = next;

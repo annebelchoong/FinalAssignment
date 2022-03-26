@@ -24,9 +24,9 @@ public interface SortedListInterface<T extends Comparable<T>> {
     public int getNumberOfEntries();
 
     public boolean isEmpty();
-    
+
     Iterator<T> getIterator();
-    
+
     public T getEntry(int givenPosition);
 
 }

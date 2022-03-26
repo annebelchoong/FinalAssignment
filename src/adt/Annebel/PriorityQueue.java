@@ -24,7 +24,7 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
    
     @Override
     public void insert(T newEntry) {
-        PriorityNode newNode =new PriorityNode(0, newEntry, null);
+        PriorityNode<T> newNode =new PriorityNode<>(0, newEntry, null);
         int prePriority = 0; 
         
         if(isEmpty()){
@@ -43,8 +43,8 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
 
     @Override
     public void makeFirst(T anEntry) {
-        PriorityNode nodeBefore = null;
-        PriorityNode currentNode = firstNode;
+        PriorityNode<T> nodeBefore = null;
+        PriorityNode<T> currentNode = firstNode;
         while(currentNode!= null && anEntry.compareTo((T)currentNode.data)!= 0){
         currentNode.priority++;
             nodeBefore = currentNode;
@@ -67,7 +67,7 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     
     @Override
     public void shiftPriority() {
-        PriorityNode currentNode = firstNode;
+        PriorityNode<T> currentNode = firstNode;
         while (!isEmpty()) {
             currentNode = currentNode.next;
             currentNode.priority++; 
@@ -103,7 +103,7 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     @Override
     public boolean contains(T anEntry) {
         boolean found = false;
-        PriorityNode tempNode = firstNode;
+        PriorityNode<T> tempNode = firstNode;
 
         while (!found && (tempNode != null)) {
             if (anEntry.compareTo((T) tempNode.data) <= 0) {
@@ -133,7 +133,7 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     
     public String toString() {
         String outputStr = "";
-        PriorityNode currentNode = firstNode;
+        PriorityNode<T> currentNode = firstNode;
         while (currentNode != null){
             outputStr += currentNode.data + "\n";
             currentNode = currentNode.next;
@@ -142,7 +142,7 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     }
     
     public void transverse(T anEntry){
-        PriorityNode currentNode = firstNode;
+        PriorityNode<T> currentNode = firstNode;
         while (currentNode != null){
             anEntry.equals(currentNode.data);
             System.out.print(currentNode.data);
