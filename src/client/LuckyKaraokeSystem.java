@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import entity.MemberModule;
+import entity.ReservationModule;
 import entity.SongModule;
 import utility.Utility;
 
@@ -20,10 +16,11 @@ public class LuckyKaraokeSystem {
     public static Scanner input = new Scanner(System.in);
     public static SongModule songList = new SongModule();
     public static MemberModule memberList = new MemberModule();
+    public static ReservationModule reservationList = new ReservationModule();
 
     public static void main(String[] args) {
         Utility.clearScreen();
-        welcome();
+        welcomeScreen();
         initData();
         initialize();
     }
@@ -31,9 +28,10 @@ public class LuckyKaraokeSystem {
     public static void initData() {
         songList.initSongData();
         memberList.initMemberData();
+        reservationList.initReservationData();
     }
 
-    public static void welcome(){
+    public static void welcomeScreen() {
         System.out.println("----------------------------------------------");
         System.out.println("|                                            |");
         System.out.println("|     Welcome to Lucky Karaoke System!       |");
@@ -62,7 +60,7 @@ public class LuckyKaraokeSystem {
             menuChoice = input.nextLine();
             System.out.println();
             System.out.println();
-            switch(menuChoice){
+            switch (menuChoice) {
                 case "1":
                     songList.songLibraryMenu();
                     break;
@@ -70,17 +68,17 @@ public class LuckyKaraokeSystem {
                     memberList.memberMenu();
                     break;
                 case "3":
+                    reservationList.reservationMenu();
                     break;
                 case "0":
                     System.out.println("Exiting System........");
                     isQuit = true;
                     break;
-                default: 
+                default:
                     Utility.clearScreen();
                     System.out.println("Invalid input. Please try again. \n\n");
                     break;
-                    
-                    
+
             }
 
         } while (!isQuit);
