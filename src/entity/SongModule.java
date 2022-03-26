@@ -5,7 +5,7 @@
  */
 package entity;
 
-import adt.*;
+import adt.HuiYun.*;
 import utility.Utility;
 
 import java.net.MalformedURLException;
