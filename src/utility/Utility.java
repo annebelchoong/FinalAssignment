@@ -34,6 +34,11 @@ public class Utility {
                 "--------------------------------------------------------------------------------------------------------------");
     }
 
+    public static void playlistHeader(){
+        System.out.printf("%-15s %-15s", "Playlist ID", "Playlist Name");
+        System.out.println("----------------------------------------------------------------");
+    }
+
     public static void cont() {
         System.out.println("\n\nPress Enter to continue");
         try {
