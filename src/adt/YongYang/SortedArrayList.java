@@ -1,5 +1,9 @@
 package adt.YongYang;
 
+/**
+ *
+ * @author yongyangboon
+ */
 public class SortedArrayList<T extends Comparable<T>> implements SortedListInterface<T> {
 
     private T[] array;
