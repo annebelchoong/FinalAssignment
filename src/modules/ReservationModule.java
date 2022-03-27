@@ -26,24 +26,6 @@ public class ReservationModule {
 
     public static adt.Guna.SortedListInterface<Member> memberList = MemberModule.getMemberList();
 
-    public ReservationModule() {
-        // this.reserveList = reserveList;
-        // this.roomList = roomList;
-        // this.timeSlots = timeSlots;
-    }
-
-    // public ReservationModule(SortedListInterface<Room> roomList,
-    // SortedListInterface<TimeSlot> timeSlots,
-    // SortedListInterface<Reservation> reservationList) {
-    // this.roomList = roomList;
-    // this.timeSlots = timeSlots;
-    // this.reservationList = reservationList;
-    // }
-
-    // public SortedListInterface<Reservation> getReservationList() {
-    // return reservationList;
-    // }
-
     public void reservationMenu() {
         do {
             Utility.clearScreen();
@@ -64,10 +46,10 @@ public class ReservationModule {
                     Utility.cont();
                     break;
                 case "4":
-                    editReservationMenu();
-                    break;
-                case "5":
-                    // cancelReservationMenu();
+                    // editReservationMenu();
+                    // break;
+                    // case "5":
+                    deleteReservationMenu();
                     break;
                 case "0":
                     exit = true;
@@ -81,14 +63,22 @@ public class ReservationModule {
     }
 
     private void searchReservationMenu() {
+        Utility.clearScreen();
+        System.out.println(printReservationHeader());
+        System.out.print("Enter ReservationNo: ");
+        String rNo = scan.nextLine();
+        Reservation reservation = getReservationByID(Integer.parseInt(rNo));
+        if (reservation == null) {
+            System.out.println("No reservation found with " + rNo);
+        } else {
+            System.out.println(reservation);
+        }
+        Utility.cont();
     }
 
     private void addReservationMenu() {
-        int roomNo = -1;
-        int timeSlot = 0;
-        boolean goGetRoomNo = false;
-        boolean goGetMemberID = false;
-        boolean addDone = false;
+        int roomNo = 0, timeSlot = 0;
+        boolean goGetRoomNo = false, goGetMemberID = false, addDone = false;
         do {
             Utility.clearScreen();
             System.out.println(printReservationHeader());
@@ -144,7 +134,7 @@ public class ReservationModule {
             System.out.println(printReservationHeader());
             System.out.print("Enter Member ID: ");
             String memberID = scan.nextLine();
-            Member member = MemberModule.getMember(Integer.parseInt(memberID));
+            Member member = MemberModule.getMemberByID(Integer.parseInt(memberID));
             if (member != null) {
                 int rNo = 10000 + reservationList.getNumOfEntries() + 1;
                 reservationList.add(new Reservation(rNo,
@@ -158,15 +148,37 @@ public class ReservationModule {
         } while (!addDone);
     }
 
-    private void editReservationMenu() {
-        do {
-            Utility.clearScreen();
-            System.out.println(printReservationHeader());
-            System.out.println(reservationList);
-            System.out.print("Enter Reservation ID that you want to edit: ");
-            String rNo = scan.nextLine();
-            System.out.println(getReservationByID(Integer.parseInt(rNo)));
-        } while (!exit);
+    private void deleteReservationMenu() {
+        Utility.clearScreen();
+        System.out.println(printReservationHeader());
+        System.out.print("Enter ReservationNo: ");
+        String rNo = scan.nextLine();
+        Reservation reservation = getReservationByID(Integer.parseInt(rNo));
+        if (reservation == null) {
+            System.out.println("No reservation found with " + rNo);
+            return;
+        } else {
+            System.out.println(reservation);
+        }
+        System.out.println("\nAre you sure you want to delete this reservation? ");
+        System.out.println("[1] yes \n[2] no");
+        System.out.print("Enter choice: ");
+        switch (scan.nextLine()) {
+            case "1":
+                if (reservationList.remove(reservation)) {
+                    System.out.println("Reservation Deleted.");
+                    Utility.cont();
+                }
+                break;
+            case "2":
+                System.out.println("Cancelled");
+                Utility.cont();
+                break;
+            default:
+                System.out.println("Invalid input. Cancelled");
+                Utility.cont();
+                break;
+        }
     }
 
     public void showMainMenu() {
@@ -174,9 +186,8 @@ public class ReservationModule {
         System.out.println("[1] View Reservations");
         System.out.println("[2] Search Reservations");
         System.out.println("[3] Add Reservation");
-        System.out.println("[4] Edit Reservation");
         System.out.println("[5] Delete Reservation");
-        System.out.println("[0] Go back");
+        System.out.println("[0] Return to Main Menu");
         System.out.print("\nEnter choice: ");
     }
 
