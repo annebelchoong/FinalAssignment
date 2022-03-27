@@ -12,11 +12,7 @@ import utility.Utility;
 
 /**
  *
-<<<<<<< HEAD
- * @author yongyang
-=======
  * @author yongyangboon
->>>>>>> ac3063124bca13789ae2f92133daa86b62fdca47
  */
 public class RoomModule {
     public static Scanner scan = new Scanner(System.in);
