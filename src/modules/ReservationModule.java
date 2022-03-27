@@ -299,6 +299,7 @@ public class ReservationModule {
     }
 
     public void initReservationData() {
+        reservationList.clear();
         reservationList
                 .add(new Reservation(10001, roomList.getEntry(1), timeSlots.getEntry(1), memberList.getEntry(4)));
         reservationList

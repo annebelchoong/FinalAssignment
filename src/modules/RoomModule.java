@@ -30,12 +30,14 @@ public class RoomModule {
     }
 
     public void initRoomData() {
+        roomList.clear();
         roomList.add(new Room(1, false));
         roomList.add(new Room(2, false));
         roomList.add(new Room(3, false));
         roomList.add(new Room(4, false));
         roomList.add(new Room(5, false));
 
+        timeSlots.clear();
         timeSlots.add(new TimeSlot(LocalTime.of(12, 0), roomList));
         timeSlots.add(new TimeSlot(LocalTime.of(14, 0), roomList));
         timeSlots.add(new TimeSlot(LocalTime.of(16, 0), roomList));
