@@ -146,6 +146,8 @@ public class PlaylistModule {
     }
 
     public void displayPlaylists() {
+        System.out.println("PLAYLIST");
+        System.out.println("=========\n");
         Utility.playlistHeader();
         System.out.print(playlist);
         System.out.print("---------------------------------------------\n\n");
@@ -172,7 +174,7 @@ public class PlaylistModule {
         // }
         // }
         // } while(!isFound);
-        System.out.println(songName + " PlayList");
+        System.out.println("|   "+songName + " PlayList   |");
         System.out.println("");
         Utility.songlistHeader();
         System.out.print(songList4);
@@ -279,6 +281,7 @@ public class PlaylistModule {
                     break;
                 case 4:
                     deleteSong();
+                    Utility.cont();
                     break;
                 case 0:
                     Utility.clearScreen();
@@ -311,6 +314,8 @@ public class PlaylistModule {
 
     public void displaySongQueue() {
         // System.out.println(songQueue);
+        System.out.println("SONG QUEUE");
+        System.out.println("===========\n");
         Iterator<Song> songQ = songQueue.getIterator();
         numberOfSongs = 0;
         Utility.songlistHeaderNum();
@@ -389,20 +394,27 @@ public class PlaylistModule {
         boolean isFound = false;
         do {
             System.out.println("Which song would you want to delete from song Queue? \n");
-            System.out.println("Enter the song number of the song: ");
+            System.out.print("Enter the song number of the song: ");
             String songChoice = input.nextLine();
 
+            // Iterator<Song> it = songQueue.getIterator();
             Iterator<Song> it = songData.songList.getIterator();
             while (it.hasNext()) {
                 Song songIt = it.next();
-                if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
-                    System.out.println(songQueue.getPriority(songIt));
+                // System.out.println(songQueue.getPriority(songIt));
 
+                if (songChoice.equals("1")) {
+                    songChoice = "0";
+                }
+
+                if (songChoice.equals(String.valueOf(songQueue.getPriority(songIt)))) {
                     songQueue.remove(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                             songIt.getSongURL()));
+                    System.out.println("\n---Song \""+ songIt.getSongName() +"\" has been removed from song queue");
                     isFound = true;
                     break;
-                } else if (!songChoice.equals(String.valueOf(songIt.getSongID())) && !it.hasNext()) {
+
+                } else if (!songChoice.equals(String.valueOf(songQueue.getPriority(songIt))) && !it.hasNext()) {
                     System.out.println("\n--- Invalid Song ID. Please try again. \n");
                 }
             }

@@ -85,7 +85,7 @@ public class SongModule extends Song {
             }
         }
 
-        System.out.println("Enter song name:");
+        System.out.print("Enter song name: ");
         songName = scanner.nextLine();
 
         while (s.hasNext()) {
@@ -100,7 +100,7 @@ public class SongModule extends Song {
         }
         // scanner.nextLine();
 
-        System.out.println("Enter artist:");
+        System.out.print("Enter artist: ");
         artist = scanner.nextLine();
 
         while (s.hasNext()) {
@@ -115,7 +115,7 @@ public class SongModule extends Song {
         }
         // scanner.nextLine();
 
-        System.out.println("Enter song url:");
+        System.out.print("Enter song url: ");
         songURL = scanner.nextLine();
         if (isValidUrl(songURL)) {
             // input is valid
@@ -138,12 +138,12 @@ public class SongModule extends Song {
     }
 
     private void deleteSong() {
-        System.out.println("===================");
-        System.out.println("||  DELETE SONG  ||");
-        System.out.println("===================\n\n");
+        // System.out.println("===================");
+        // System.out.println("||  DELETE SONG  ||");
+        // System.out.println("===================\n\n");
         viewSongLibrary();
 
-        System.out.print("\nEnter song ID for delete:");
+        System.out.print("\nEnter song ID for delete: ");
         int songID = scanner.nextInt();
         System.out.println();
 
@@ -191,7 +191,7 @@ public class SongModule extends Song {
 
     private void findSongByName() {
         // viewSongLibrary();
-        System.out.println("\nEnter the name of the song:");
+        System.out.print("\nEnter the name of the song: ");
         String songName = scanner.nextLine();
 
         Iterator<Song> s = songList.getIterator();
