@@ -23,4 +23,5 @@ public interface QueueInterface<T extends Comparable<T>> {
     public boolean isEmpty();
     public void clear();
     Iterator<T> getIterator();
+    public int getPriority(T anEntry);
 }

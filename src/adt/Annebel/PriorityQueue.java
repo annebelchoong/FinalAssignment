@@ -100,12 +100,12 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
             nodeBefore = currentNode;
             currentNode = currentNode.next;
             if (currentNode != null && anEntry.compareTo((T) currentNode.data) == 0) {
-                    nodeBefore.next = currentNode.next;
-                    currentNode = currentNode.next;
-                    // currentNode.next.priority ++;
-                }
+                nodeBefore.next = currentNode.next;
+                currentNode = currentNode.next;
+                // currentNode.next.priority ++;
             }
-        
+        }
+
     }
 
     @Override
@@ -193,8 +193,18 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
 
     }
 
-    // public int getPriority(T anEntry){
-    //
-    // }
-
+    public int getPriority(T anEntry) {
+        PriorityNode<T> nodeBefore = null;
+        PriorityNode<T> currentNode = firstNode;
+        int priority = 0;
+        while (currentNode != null && anEntry.compareTo((T) currentNode.data) != 0) {
+            // currentNode.priority++;
+            nodeBefore = currentNode;
+            currentNode = currentNode.next;
+            if (currentNode != null && anEntry.compareTo((T) currentNode.data) == 0) {
+                priority = currentNode.priority;
+            }
+        }
+        return priority;
+    }
 }
