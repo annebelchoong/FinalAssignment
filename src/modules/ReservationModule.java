@@ -46,9 +46,9 @@ public class ReservationModule {
                     Utility.cont();
                     break;
                 case "4":
-                    // editReservationMenu();
-                    // break;
-                    // case "5":
+                    editReservationMenu();
+                    break;
+                case "5":
                     deleteReservationMenu();
                     break;
                 case "0":
@@ -148,6 +148,118 @@ public class ReservationModule {
         } while (!addDone);
     }
 
+    private void editReservationMenu() {
+        // do {
+        Utility.clearScreen();
+        System.out.println(printReservationHeader());
+        System.out.println(reservationList);
+        System.out.print("Enter Reservation ID that you want to edit: ");
+        String rNo = scan.nextLine();
+        Reservation reservation = getReservationByID(Integer.parseInt(rNo));
+        if (reservation == null) {
+            System.out.println("No reservation found with " + rNo);
+            return;
+        } else {
+
+            System.out.println(reservation);
+            System.out.println("What would you like to change for this reservation?");
+            System.out.println("[1] Room");
+            System.out.println("[2] Time");
+            System.out.print("\nEnter choice: ");
+            switch (scan.nextLine()) {
+                case "1":
+                    int roomNo = 0;
+                    boolean getRoomDone = false;
+                    do {
+                        Utility.clearScreen();
+                        System.out.println(printReservationHeader());
+                        RoomModule.viewRoomStatus();
+                        System.out.println("Which room would you like to use? [1] to [5]");
+                        System.out.print("\nEnter choice: ");
+                        String room = scan.nextLine();
+                        switch (room) {
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                                roomNo = Integer.parseInt(room);
+                                Reservation newReservation = new Reservation(
+                                        reservation.getReservationNo(),
+                                        roomList.getEntry(roomNo),
+                                        timeSlots.getEntry(reservationList.getPosition(reservation)),
+                                        reservation.getMember());
+                                System.out.println(newReservation.getReservationNo());
+                                System.out.println(roomList.getEntry(roomNo));
+                                System.out.println(reservationList.getPosition(reservation));
+                                System.out.println(timeSlots.getEntry(reservationList.getPosition(reservation)));
+                                System.out.println(reservation.getMember());
+                                if (reservationList.replace(reservationList.getPosition(reservation), newReservation)) {
+                                    System.out.println("Edit Succesful.");
+                                    System.out.println(newReservation);
+                                } else {
+                                    System.out.println("Error. Unable to edit reservation. Please try again.");
+                                }
+                                getRoomDone = true;
+                                Utility.cont();
+                                break;
+                            default:
+                                System.out.println("Invalid input, please try again.");
+                                break;
+                        }
+                    } while (!getRoomDone);
+                    break;
+                case "2":
+                    int timeSlot = 0;
+                    boolean getTimeDone = false;
+                    do {
+                        Utility.clearScreen();
+                        System.out.println(printReservationHeader());
+                        RoomModule.selectTimeSlot(reservationList.getPosition(reservation));
+                        System.out.println("[1] 12:00\n[2] 14:00\n[3] 16:00\n[4] 18:00\n[5] 2:000\n[6] 22:00");
+                        System.out.println("Which time? [1] to [6]");
+                        System.out.print("\nEnter choice: ");
+                        String time = scan.nextLine();
+                        switch (time) {
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                                timeSlot = Integer.parseInt(time);
+                                Reservation newReservation = new Reservation(
+                                        reservation.getReservationNo(),
+                                        roomList.getEntry(reservationList.getPosition(reservation)),
+                                        timeSlots.getEntry(timeSlot),
+                                        reservation.getMember());
+                                System.out.println(newReservation.getReservationNo());
+                                System.out.println(reservationList.getPosition(reservation));
+                                System.out.println(timeSlot);
+                                System.out.println(timeSlots.getEntry(reservationList.getPosition(reservation)));
+                                System.out.println(reservation.getMember());
+                                if (reservationList.replace(reservationList.getPosition(reservation), newReservation)) {
+                                    System.out.println("Edit Succesful.");
+                                    System.out.println(newReservation);
+                                } else {
+                                    System.out.println("Error. Unable to edit reservation. Please try again.");
+                                }
+                                getTimeDone = true;
+                                Utility.cont();
+                                break;
+                            default:
+                                System.out.println("Invalid input, please try again.");
+                                break;
+                        }
+                    } while (!getTimeDone);
+                    break;
+                default:
+                    break;
+            }
+        }
+        // } while (!exit);
+    }
+
     private void deleteReservationMenu() {
         Utility.clearScreen();
         System.out.println(printReservationHeader());
@@ -182,10 +294,10 @@ public class ReservationModule {
     }
 
     public void showMainMenu() {
-        System.out.println();
         System.out.println("[1] View Reservations");
         System.out.println("[2] Search Reservations");
         System.out.println("[3] Add Reservation");
+        System.out.println("[4] Edit Reservation");
         System.out.println("[5] Delete Reservation");
         System.out.println("[0] Return to Main Menu");
         System.out.print("\nEnter choice: ");
