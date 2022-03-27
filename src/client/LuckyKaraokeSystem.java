@@ -12,6 +12,10 @@ import modules.SongModule;
 /**
  *
  * @author annebelchoong
+ * @author yongyang
+ * @author Chia Hui Yun
+ * @author Gunaseelan
+ * 
  */
 public class LuckyKaraokeSystem {
 
