@@ -72,7 +72,11 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
 
     @Override
     public int getPosition(T anEntry) {
-        //
+        for (int i = 0; i <= numberOfEntries; i++) {
+            if (getEntry(i) == anEntry) {
+                return i;
+            }
+        }
         return 0;
     }
 
@@ -100,8 +104,13 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
 
     @Override
     public boolean contains(T anEntry) {
-        //
-        return false;
+        boolean found = false;
+        for (int index = 0; !found && (index < numberOfEntries); index++) {
+            if (anEntry.equals(array[index])) {
+                found = true;
+            }
+        }
+        return found;
     }
 
     @Override
