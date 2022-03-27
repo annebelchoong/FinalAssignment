@@ -4,6 +4,7 @@ package adt.YongYang;
  *
  * @author yongyangboon
  */
+@SuppressWarnings("unchecked")
 public class SortedArrayList<T extends Comparable<T>> implements SortedListInterface<T> {
 
     private T[] array;
@@ -14,7 +15,6 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
         this(INITIAL_CAPACITY);
     }
 
-    @SuppressWarnings("unchecked")
     public SortedArrayList(int startingCapacity) {
         numberOfEntries = 0;
         array = (T[]) new Comparable[startingCapacity];
