@@ -27,6 +27,7 @@ public class PlaylistModule {
     QueueInterface<Playlist> playlist = new PriorityQueue<>();
     public SongModule songData = new SongModule();
     public Playlist songsInPlaylist = new Playlist();
+    int numberOfSongs = 0;
 
     public PlaylistModule() {
 
@@ -309,8 +310,19 @@ public class PlaylistModule {
     }
 
     public void displaySongQueue() {
-        Utility.songlistHeader();
-        System.out.println(songQueue);
+        // System.out.println(songQueue);
+        Iterator<Song> songQ = songQueue.getIterator();
+        numberOfSongs = 0;
+        Utility.songlistHeaderNum();
+        while (songQ.hasNext()) {
+            Song songq = songQ.next();
+            numberOfSongs++;
+            System.out.printf("%-5d %-10s %-20s %-20s %-20s\n", numberOfSongs, songq.getSongID(), songq.getSongName(),
+                    songq.getArtist(), songq.getSongURL());
+        }
+        System.out.println(
+                "--------------------------------------------------------------------------------------------------------------\n\n");
+
     }
 
     public void playSong() {
@@ -377,12 +389,15 @@ public class PlaylistModule {
         boolean isFound = false;
         do {
             System.out.println("Which song would you want to delete from song Queue? \n");
-            System.out.println("Enter the song ID of the song: ");
+            System.out.println("Enter the song number of the song: ");
             String songChoice = input.nextLine();
+
             Iterator<Song> it = songData.songList.getIterator();
             while (it.hasNext()) {
                 Song songIt = it.next();
                 if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
+                    System.out.println(songQueue.getPriority(songIt));
+
                     songQueue.remove(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                             songIt.getSongURL()));
                     isFound = true;
