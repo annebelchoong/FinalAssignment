@@ -6,8 +6,7 @@
 package client;
 
 import entity.*;
-import modules.PlaylistModule;
-import modules.SongModule;
+import modules.*;
 import utility.Utility;
 
 import java.util.Scanner;
@@ -20,14 +19,15 @@ public class KaraokeSession {
     public static Scanner input = new Scanner(System.in);
     public static PlaylistModule playlist = new PlaylistModule();
     public static SongModule songLib = new SongModule();
+    public static RoomModule room = new RoomModule();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Utility.clearScreen();
-        welcome();
         initData();
+        welcome();
         startSession();
 
         // QueueInterface<Song> songQueue = new PriorityQueue<>();
@@ -52,11 +52,11 @@ public class KaraokeSession {
     }
 
     public static void welcome(){
-        System.out.println("--------------------------------------------");
-        System.out.println("|                                           |");
-        System.out.println("|    Welcome to " + "for your karaoke session!   |");
-        System.out.println("|                                           |");
-        System.out.println("--------------------------------------------");
+        System.out.println("----------------------------------------------------");
+        System.out.println("|                                                  |");
+        System.out.println("|    Welcome to Room " + room.getRoomList().getEntry(1).getRoomNo() + " for your karaoke session!   |");
+        System.out.println("|                                                  |");
+        System.out.println("----------------------------------------------------");
 
         System.out.println();
         System.out.println();
@@ -77,6 +77,7 @@ public class KaraokeSession {
        playlist.initPlaylistData();
        playlist.initSongData();
        playlist.initPlaylistSongData();
+       room.initRoomData();
     }
 
     public static void startSession() {
@@ -111,6 +112,7 @@ public class KaraokeSession {
                             break;
                         }
                     case "0": 
+                        System.out.println("Ending session....\n\n");
                         isQuit = true;
                         break;
                     default:

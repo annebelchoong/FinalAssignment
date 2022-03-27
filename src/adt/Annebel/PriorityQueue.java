@@ -78,11 +78,12 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     @Override
     public T removeMin() {
         T front = null;
+        PriorityNode<T> currentNode = firstNode;
 
         if (!isEmpty()) {
-            front = firstNode.data;
+            front = currentNode.data;
             firstNode = firstNode.next;
-            firstNode.priority--;
+            currentNode.priority--;
 
             if (firstNode == null) { // there is no more next value after first Node
                 lastNode = null; // it means it is the end of the queue
@@ -96,12 +97,13 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
         PriorityNode<T> nodeBefore = null;
         PriorityNode<T> currentNode = firstNode;
         while (currentNode != null && anEntry.compareTo((T) currentNode.data) != 0) {
-            // currentNode.priority--；
+            // currentNode.priority ++;
             nodeBefore = currentNode;
             currentNode = currentNode.next;
             if (currentNode != null && anEntry.compareTo((T) currentNode.data) == 0) {
                 nodeBefore.next = currentNode.next;
                 currentNode = currentNode.next;
+                // currentNode.priority--;
                 // currentNode.next.priority ++;
             }
         }
