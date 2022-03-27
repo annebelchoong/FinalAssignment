@@ -12,7 +12,7 @@ import modules.SongModule;
 /**
  *
  * @author annebelchoong
- * @author yongyang
+ * @author yongyangboon
  * @author Chia Hui Yun
  * @author Gunaseelan
  * 

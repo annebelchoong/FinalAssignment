@@ -2,7 +2,7 @@ package entity;
 
 /**
  *
- * @author yongyang
+ * @author yongyangboon
  */
 public class Room implements Comparable<Room> {
     private int roomNo;
@@ -62,7 +62,6 @@ public class Room implements Comparable<Room> {
     @Override
     public String toString() {
         return String.valueOf(getRoomNo());
-        // return getRoomNo() + "\t" + roomStatus;
     }
 
     @Override

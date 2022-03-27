@@ -8,8 +8,6 @@ public interface SortedListInterface<T extends Comparable<T>> {
 
     public void add(T newEntry);
 
-    // public boolean add(T anEntry, int givenPosition);
-
     public boolean remove(T anEntry);
 
     public T remove(int givenPosition);
@@ -19,8 +17,6 @@ public interface SortedListInterface<T extends Comparable<T>> {
     public T getEntry(int givenPosition);
 
     public boolean replace(int givenPosition, T newEntry);
-
-    // public T getLastEntry();
 
     public boolean contains(T anEntry);
 

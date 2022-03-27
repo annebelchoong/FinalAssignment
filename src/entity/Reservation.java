@@ -1,10 +1,8 @@
 package entity;
 
-import entity.Room.RoomStatus;
-
 /**
  *
- * @author yongyang
+ * @author yongyangboon
  */
 public class Reservation implements Comparable<Reservation> {
    private int reservationNo = 10000;
@@ -17,7 +15,6 @@ public class Reservation implements Comparable<Reservation> {
       this.room = room;
       this.timeSlot = timeSlot;
       this.member = member;
-      // Room.roomStatus = RoomStatus.BOOKED;
    }
 
    public int getReservationNo() {

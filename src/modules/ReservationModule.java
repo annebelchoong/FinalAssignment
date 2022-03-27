@@ -12,14 +12,12 @@ import utility.Utility;
 
 /**
  *
- * @author yongyang
+ * @author yongyangboon
  */
 public class ReservationModule {
     public static Scanner scan = new Scanner(System.in);
     private static boolean exit;
-
-    // public SortedListInterface<Room> roomList = new SortedArrayList<>();
-    // public SortedListInterface<TimeSlot> timeSlots = new SortedArrayList<>();
+    
     public SortedListInterface<Room> roomList = RoomModule.getRoomList();
     public SortedListInterface<TimeSlot> timeSlots = RoomModule.getTimeSlots();
     public SortedListInterface<Reservation> reservationList = new SortedArrayList<>();
@@ -119,8 +117,6 @@ public class ReservationModule {
                 case "5":
                 case "6":
                     timeSlot = Integer.parseInt(time);
-                    // break;
-                    // case "0":
                     goGetMemberID = true;
                     Utility.clearScreen();
                     break;
@@ -189,14 +185,9 @@ public class ReservationModule {
                                         roomList.getEntry(roomNo),
                                         timeSlots.getEntry(reservationList.getPosition(reservation)),
                                         reservation.getMember());
-                                System.out.println(newReservation.getReservationNo());
-                                System.out.println(roomList.getEntry(roomNo));
-                                System.out.println(reservationList.getPosition(reservation));
-                                System.out.println(timeSlots.getEntry(reservationList.getPosition(reservation)));
-                                System.out.println(reservation.getMember());
                                 if (reservationList.replace(reservationList.getPosition(reservation), newReservation)) {
                                     System.out.println("Edit Succesful.");
-                                    System.out.println(newReservation);
+                                    // System.out.println(newReservation);
                                 } else {
                                     System.out.println("Error. Unable to edit reservation. Please try again.");
                                 }
@@ -233,11 +224,6 @@ public class ReservationModule {
                                         roomList.getEntry(reservationList.getPosition(reservation)),
                                         timeSlots.getEntry(timeSlot),
                                         reservation.getMember());
-                                System.out.println(newReservation.getReservationNo());
-                                System.out.println(reservationList.getPosition(reservation));
-                                System.out.println(timeSlot);
-                                System.out.println(timeSlots.getEntry(reservationList.getPosition(reservation)));
-                                System.out.println(reservation.getMember());
                                 if (reservationList.replace(reservationList.getPosition(reservation), newReservation)) {
                                     System.out.println("Edit Succesful.");
                                     System.out.println(newReservation);
@@ -257,7 +243,6 @@ public class ReservationModule {
                     break;
             }
         }
-        // } while (!exit);
     }
 
     private void deleteReservationMenu() {

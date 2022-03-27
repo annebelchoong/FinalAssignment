@@ -32,7 +32,6 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
         makeRoom(i + 1);
         array[i] = newEntry;
         numberOfEntries++;
-        // return true;
     }
 
     @Override
@@ -93,7 +92,7 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
     public boolean replace(int givenPosition, T newEntry) {
         boolean isSuccessful = true;
 
-        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) { // why givenPosition more than eq 1?
+        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) { 
             array[givenPosition - 1] = newEntry;
         } else {
             isSuccessful = false;
