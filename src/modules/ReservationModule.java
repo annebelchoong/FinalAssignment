@@ -221,7 +221,7 @@ public class ReservationModule {
                                 timeSlot = Integer.parseInt(time);
                                 Reservation newReservation = new Reservation(
                                         reservation.getReservationNo(),
-                                        roomList.getEntry(reservationList.getPosition(reservation)),
+                                        roomList.getEntry(2),
                                         timeSlots.getEntry(timeSlot),
                                         reservation.getMember());
                                 if (reservationList.replace(reservationList.getPosition(reservation), newReservation)) {
