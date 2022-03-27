@@ -56,19 +56,19 @@ public class ReservationModule {
                     Utility.cont();
                     break;
                 case "2":
+                    searchReservationMenu();
+                    break;
+                case "3":
                     Utility.clearScreen();
                     addReservationMenu();
                     Utility.cont();
                     break;
-                case "3":
-                    // editReservationMenu();
-                    break;
                 case "4":
+                    editReservationMenu();
+                    break;
+                case "5":
                     // cancelReservationMenu();
                     break;
-                // case "5":
-                // // generateReservationMenu();
-                // break;
                 case "0":
                     exit = true;
                     Utility.clearScreen();
@@ -80,9 +80,15 @@ public class ReservationModule {
         } while (!exit);
     }
 
+    private void searchReservationMenu() {
+    }
+
     private void addReservationMenu() {
         int roomNo = -1;
         int timeSlot = 0;
+        boolean goGetRoomNo = false;
+        boolean goGetMemberID = false;
+        boolean addDone = false;
         do {
             Utility.clearScreen();
             System.out.println(printReservationHeader());
@@ -99,14 +105,14 @@ public class ReservationModule {
                     roomNo = Integer.parseInt(room);
                     // break;
                     // case "0":
-                    exit = true;
+                    goGetRoomNo = true;
                     Utility.clearScreen();
                     break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-        } while (!exit);
+        } while (!goGetRoomNo);
         do {
             Utility.clearScreen();
             System.out.println(printReservationHeader());
@@ -123,16 +129,16 @@ public class ReservationModule {
                 case "5":
                 case "6":
                     timeSlot = Integer.parseInt(time);
-                    break;
-                case "0":
-                    exit = true;
+                    // break;
+                    // case "0":
+                    goGetMemberID = true;
                     Utility.clearScreen();
                     break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-        } while (!exit);
+        } while (!goGetMemberID);
         do {
             Utility.clearScreen();
             System.out.println(printReservationHeader());
@@ -140,23 +146,48 @@ public class ReservationModule {
             String memberID = scan.nextLine();
             Member member = MemberModule.getMember(Integer.parseInt(memberID));
             if (member != null) {
-                int rID = 10000 + reservationList.getNumOfEntries() + 1;
-                reservationList.add(new Reservation(rID,
+                int rNo = 10000 + reservationList.getNumOfEntries() + 1;
+                reservationList.add(new Reservation(rNo,
                         roomList.getEntry(roomNo), timeSlots.getEntry(timeSlot), member));
                 System.out.println("Success");
                 System.out.println(reservationList);
+                addDone = true;
+            } else {
+                System.out.println("MemberID does not exist. Please try again.");
             }
+        } while (!addDone);
+    }
+
+    private void editReservationMenu() {
+        do {
+            Utility.clearScreen();
+            System.out.println(printReservationHeader());
+            System.out.println(reservationList);
+            System.out.print("Enter Reservation ID that you want to edit: ");
+            String rNo = scan.nextLine();
+            System.out.println(getReservationByID(Integer.parseInt(rNo)));
         } while (!exit);
     }
 
     public void showMainMenu() {
         System.out.println();
         System.out.println("[1] View Reservations");
-        System.out.println("[2] Add Reservation");
-        System.out.println("[3] Edit Reservation");
-        System.out.println("[4] Delete Reservation");
+        System.out.println("[2] Search Reservations");
+        System.out.println("[3] Add Reservation");
+        System.out.println("[4] Edit Reservation");
+        System.out.println("[5] Delete Reservation");
         System.out.println("[0] Go back");
         System.out.print("\nEnter choice: ");
+    }
+
+    public Reservation getReservationByID(int rNo) {
+        for (int i = 1; i <= reservationList.getNumOfEntries(); i++) {
+            Reservation reservation = reservationList.getEntry(i);
+            if (reservation.getReservationNo() == rNo) {
+                return reservation;
+            }
+        }
+        return null;
     }
 
     public void initReservationData() {
