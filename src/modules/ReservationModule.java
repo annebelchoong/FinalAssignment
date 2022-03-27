@@ -206,7 +206,7 @@ public class ReservationModule {
                     do {
                         Utility.clearScreen();
                         System.out.println(printReservationHeader());
-                        RoomModule.selectTimeSlot(reservationList.getPosition(reservation));
+                        RoomModule.selectTimeSlot(2);
                         System.out.println("[1] 12:00\n[2] 14:00\n[3] 16:00\n[4] 18:00\n[5] 2:000\n[6] 22:00");
                         System.out.println("Which time? [1] to [6]");
                         System.out.print("\nEnter choice: ");
