@@ -29,6 +29,17 @@ public class MemberModule extends Member {
         return memberList;
     }
 
+    public static Member getMember(int memberID) {
+        Iterator<Member> m = memberList.getIterator();
+        while (m.hasNext()) {
+            Member member = m.next();
+            if (member.getMemberId() == memberID) {
+                return member;
+            }
+        }
+        return null;
+    }
+
     public void errorMessage() {
         System.out.println("Please enter between Option 1 until Option 6");
     }
