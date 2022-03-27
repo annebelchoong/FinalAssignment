@@ -186,7 +186,8 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
 
     }
 
-    public int getPriority(T anEntry) {
+    @Override
+    public int getPosition(T anEntry) {
         PriorityNode<T> nodeBefore = null;
         PriorityNode<T> currentNode = firstNode;
         int priority = 0;

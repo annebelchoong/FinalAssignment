@@ -325,8 +325,7 @@ public class PlaylistModule {
             System.out.printf("%-5d %-10s %-20s %-20s %-20s\n", numberOfSongs, songq.getSongID(), songq.getSongName(),
                     songq.getArtist(), songq.getSongURL());
         }
-        System.out.println(
-                "--------------------------------------------------------------------------------------------------------------\n\n");
+        System.out.println("--------------------------------------------------------------------------------------------------------------\n\n");
 
     }
 
@@ -407,14 +406,14 @@ public class PlaylistModule {
                     songChoice = "0";
                 }
 
-                if (songChoice.equals(String.valueOf(songQueue.getPriority(songIt)))) {
+                if (songChoice.equals(String.valueOf(songQueue.getPosition(songIt)))) {
                     songQueue.remove(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                             songIt.getSongURL()));
                     System.out.println("\n---Song \""+ songIt.getSongName() +"\" has been removed from song queue");
                     isFound = true;
                     break;
 
-                } else if (!songChoice.equals(String.valueOf(songQueue.getPriority(songIt))) && !it.hasNext()) {
+                } else if (!songChoice.equals(String.valueOf(songQueue.getPosition(songIt))) && !it.hasNext()) {
                     System.out.println("\n--- Invalid Song ID. Please try again. \n");
                 }
             }
