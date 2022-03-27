@@ -54,10 +54,9 @@ public class KaraokeSession {
     public static void welcome(){
         System.out.println("----------------------------------------------------");
         System.out.println("|                                                  |");
-        System.out.println("|    Welcome to Room " + room.getRoomList().getEntry(1).getRoomNo() + " for your karaoke session!   |");
+        System.out.println("|    Welcome to Room " + RoomModule.getRoomList().getEntry(1).getRoomNo() + " for your karaoke session!   |");
         System.out.println("|                                                  |");
         System.out.println("----------------------------------------------------");
-
         System.out.println();
         System.out.println();
     }
