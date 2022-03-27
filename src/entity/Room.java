@@ -6,7 +6,8 @@ package entity;
  */
 public class Room implements Comparable<Room> {
     private int roomNo;
-    private boolean booked;
+    private Boolean booked;
+    public static RoomStatus roomStatus;
 
     public Room() {
 
@@ -15,6 +16,7 @@ public class Room implements Comparable<Room> {
     public Room(int roomNo, boolean booked) {
         this.roomNo = roomNo;
         this.booked = booked;
+        roomStatus = RoomStatus.AVAILABLE;
     }
 
     public int getRoomNo() {
@@ -25,12 +27,34 @@ public class Room implements Comparable<Room> {
         this.roomNo = roomNo;
     }
 
-    public boolean getBooked() { 
+    public boolean getBooked() {
         return this.booked;
     }
 
-    public String getRoomStatus() {
-        return getBooked() ? "Booked" : "Available";
+    public String getRoomStatusinString() {
+        switch (roomStatus) {
+            case BOOKED:
+                return "   Booked";
+            case SERVICE:
+                return " Service ";
+            case AVAILABLE:
+            default:
+                return "Available";
+        }
+    }
+
+    public RoomStatus getRoomStatus() {
+        return roomStatus;
+    }
+
+    public void setRoomStatus(RoomStatus status) {
+        // if (status == RoomStatus.BOOKED)
+        //     status = RoomStatus.BOOKED;
+        // if (status == RoomStatus.AVAILABLE)
+        //     status = RoomStatus.AVAILABLE;
+        // if (status == RoomStatus.SERVICE)
+        //     status = RoomStatus.SERVICE;
+        roomStatus = status;
     }
 
     public void setBooked() {
@@ -43,12 +67,33 @@ public class Room implements Comparable<Room> {
 
     @Override
     public String toString() {
-        String roomStatus = getBooked() ? "Booked" : "Available";
-        return "  " + getRoomNo() + "\t" + roomStatus;
+        return getRoomNo() + "\t" + roomStatus;
     }
 
     @Override
     public int compareTo(Room o) {
         return (int) (this.roomNo - o.roomNo);
+    }
+
+    public enum RoomStatus {
+        AVAILABLE, BOOKED, SERVICE;
+
+        private static RoomStatus getRoomStatus() {
+            return roomStatus;
+        }
+
+        @Override
+        public String toString() {
+            switch (RoomStatus.getRoomStatus()) {
+                case BOOKED:
+                    return "Booked";
+                case SERVICE:
+                    return "Service ";
+                case AVAILABLE:
+                default:
+                    return "Available";
+            }
+        }
+
     }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import adt.YongYang.SortedArrayList;
 import adt.YongYang.SortedListInterface;
 import entity.Room;
+import entity.Room.RoomStatus;
 import entity.TimeSlot;
 import utility.Utility;
 
@@ -47,14 +48,6 @@ public class RoomModule {
         timeSlots.add(new TimeSlot(LocalTime.of(22, 0), roomList));
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                " roomList='" + getRoomList() + "'" +
-                ", timeSlots='" + getTimeSlots() + "'" +
-                "}";
-    }
-
     public void roomMenu() {
         do {
             Utility.clearScreen();
@@ -72,11 +65,11 @@ public class RoomModule {
                     changeRoomStatusMenu();
                     break;
                 // case "3":
-                //     // addReservationMenu();
-                //     break;
+                // // addReservationMenu();
+                // break;
                 // case "4":
-                //     // deleteReservationMenu();
-                //     break;
+                // // deleteReservationMenu();
+                // break;
                 case "0":
                     exit = true;
                     Utility.clearScreen();
@@ -98,21 +91,131 @@ public class RoomModule {
         for (int t = 1; t <= timeSlots.getNumOfEntries(); t++) {
             System.out.printf(" %-5s ", timeSlots.getEntry(t).getTime());
             for (int b = 1; b <= roomList.getNumOfEntries(); b++) {
-                System.out.printf("  |" + "  %-7s ", roomList.getEntry(b).getRoomStatus());
+                System.out.printf("  |" + "  %-7s ", roomList.getEntry(b).getRoomStatusinString());
             }
             System.out.println("");
         }
         System.out.println("=".repeat(85));
     }
 
-    private boolean changeRoomStatusMenu() {
-        for (int b = 1; b <= roomList.getNumOfEntries(); b++) {
-            System.out.printf("%-7s ", roomList.getEntry(b).getRoomStatus());
+    public void changeRoomStatusMenu() {
+        int roomNo = -1;
+        int timeSlot = 0;
+        RoomStatus roomStatus = null;
+        do {
+            Utility.clearScreen();
+            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            viewRoomStatus();
+            System.out.println("Which room would you like to change? [1] to [5]");
+            System.out.print("\nEnter choice: ");
+            String room = scan.nextLine();
+            switch (room) {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                    roomNo = Integer.parseInt(room);
+                    // break;
+                    // case "0":
+                    exit = true;
+                    Utility.clearScreen();
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+                    break;
+            }
+        } while (!exit);
+        do {
+            Utility.clearScreen();
+            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            selectTimeSlot(roomNo);
+            System.out.println("[1] 12:00\n[2] 14:00\n[3] 16:00\n[4] 18:00\n[5] 2:000\n[6] 22:00");
+            System.out.println("Which time would you like to change? [1] to [6]");
+            System.out.print("\nEnter choice: ");
+            String time = scan.nextLine();
+            switch (time) {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                    timeSlot = Integer.parseInt(time);
+                    break;
+                case "0":
+                    exit = true;
+                    Utility.clearScreen();
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+                    break;
+            }
+        } while (!exit);
+        do {
+            Utility.clearScreen();
+            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            System.out.println("[1] set to Booked");
+            System.out.println("[2] set to Available");
+            System.out.println("[3] set to Service");
+            System.out.println("Which status would you like to change for this room at this time? [1] to [3]");
+            System.out.print("\nEnter choice: ");
+            String status = scan.nextLine();
+            switch (status) {
+                case "1":
+                    status = "BOOKED";
+                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
+                    break;
+                case "2":
+                    status = "AVAILABLE";
+                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
+                    break;
+                case "3":
+                    status = "SERVICE";
+                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
+                    break;
+                case "0":
+                    exit = true;
+                    Utility.clearScreen();
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+                    break;
+            }
+        } while (!exit);
+        if (changeSpecificRoomWithTime(roomNo, timeSlot, roomStatus)) {
+            System.out.println(
+                    "Room " + roomNo + " for " + timeSlot + " has been changed to " + roomStatus);
+            Utility.cont();
+        } else {
+            System.out.println("Something wong");
         }
-        System.out.println("Which room would you like to change?");
-        System.out.print("\nEnter choice: ");
 
-        return false;
     }
 
+    private void selectTimeSlot(int roomNo) {
+        System.out.println("=".repeat(23));
+        System.out.print("TimeSlot ");
+        for (int r = 1; r <= roomNo; r++) {
+            if (r == roomNo) {
+                System.out.printf("|    Room %-5s", roomList.getEntry(r).getRoomNo());
+            }
+        }
+        System.out.println("\n" + "=".repeat(23));
+        for (int t = 1; t <= timeSlots.getNumOfEntries(); t++) {
+            System.out.printf(" %-5s ", timeSlots.getEntry(t).getTime());
+            for (int b = 1; b <= roomNo; b++) {
+                if (b == roomNo) {
+                    System.out.printf("  |" + "  %-7s ", roomList.getEntry(b).getRoomStatusinString());
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("=".repeat(23));
+    }
+
+    private boolean changeSpecificRoomWithTime(int roomNo, int timeSlot, RoomStatus roomStatus) {
+        roomList.getEntry(roomNo).setRoomStatus(roomStatus);
+        return true;
+    }
 }
