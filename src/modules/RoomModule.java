@@ -10,20 +10,16 @@ import entity.Room.RoomStatus;
 import entity.TimeSlot;
 import utility.Utility;
 
+/**
+ *
+ * @author yongyangboon
+ */
 public class RoomModule {
     public static Scanner scan = new Scanner(System.in);
     private static boolean exit;
 
     public static SortedListInterface<Room> roomList = new SortedArrayList<>();
     public static SortedListInterface<TimeSlot> timeSlots = new SortedArrayList<>();
-
-    public RoomModule() {
-    }
-
-    public RoomModule(SortedListInterface<Room> roomList, SortedListInterface<TimeSlot> timeSlots) {
-        // roomList = roomList;
-        // timeSlots = timeSlots;
-    }
 
     public static SortedListInterface<Room> getRoomList() {
         return roomList;
@@ -66,12 +62,6 @@ public class RoomModule {
                 case "2":
                     changeRoomStatusMenu();
                     break;
-                // case "3":
-                // // addReservationMenu();
-                // break;
-                // case "4":
-                // // deleteReservationMenu();
-                // break;
                 case "0":
                     exit = true;
                     Utility.clearScreen();

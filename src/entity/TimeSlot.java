@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import adt.YongYang.SortedListInterface;
 /**
  *
- * @author yongyang
+ * @author yongyangboon
  */
 public class TimeSlot implements Comparable<TimeSlot> {
     private LocalTime time;
