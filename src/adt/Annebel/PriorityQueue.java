@@ -66,15 +66,6 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
 
     }
 
-    // @Override
-    // public void shiftPriority() {
-    // PriorityNode<T> currentNode = firstNode;
-    // while (!isEmpty()) {
-    // currentNode = currentNode.next;
-    // currentNode.priority++;
-    // }
-    // }
-
     @Override
     public T removeMin() {
         T front = null;

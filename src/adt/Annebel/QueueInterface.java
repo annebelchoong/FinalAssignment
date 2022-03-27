@@ -14,7 +14,6 @@ import java.util.Iterator;
 public interface QueueInterface<T extends Comparable<T>> {
     public void insert(T newEntry);
     public void makeFirst(T anEntry);
-    // public void shiftPriority();
     public T removeMin();
     public void remove(T anEntry);
     public T peekMin();
