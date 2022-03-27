@@ -277,7 +277,7 @@ public class PlaylistModule {
                     Utility.cont();
                     break;
                 case 4:
-                    // deleteSong();
+                    deleteSong();
                     break;
                 case 0:
                     Utility.clearScreen();
@@ -383,7 +383,7 @@ public class PlaylistModule {
             while (it.hasNext()) {
                 Song songIt = it.next();
                 if (songChoice.equals(String.valueOf(songIt.getSongID()))) {
-                    songQueue.makeFirst(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
+                    songQueue.remove(new Song(songIt.getSongID(), songIt.getSongName(), songIt.getArtist(),
                             songIt.getSongURL()));
                     isFound = true;
                     break;
