@@ -10,6 +10,10 @@ import entity.Room.RoomStatus;
 import entity.TimeSlot;
 import utility.Utility;
 
+/**
+ *
+ * @author yongyang
+ */
 public class RoomModule {
     public static Scanner scan = new Scanner(System.in);
     private static boolean exit;
