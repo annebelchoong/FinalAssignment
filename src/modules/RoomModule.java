@@ -54,7 +54,7 @@ public class RoomModule {
             System.out.println(printRoomHeader());
             System.out.println("[1] View Rooms");
             System.out.println("[2] Change Room Status");
-            System.out.println("[0] Go back");
+            System.out.println("[0] Return to Main Menu");
             System.out.print("\nEnter choice: ");
             switch (scan.nextLine()) {
                 case "1":

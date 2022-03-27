@@ -29,7 +29,7 @@ public class MemberModule extends Member {
         return memberList;
     }
 
-    public static Member getMember(int memberID) {
+    public static Member getMemberByID(int memberID) {
         Iterator<Member> m = memberList.getIterator();
         while (m.hasNext()) {
             Member member = m.next();

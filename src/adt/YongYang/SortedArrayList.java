@@ -18,6 +18,9 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
 
     @Override
     public void add(T newEntry) {
+        if (isArrayFull()) {
+            doubleArray();
+        }
         int i = 0;
         while (i < numberOfEntries && newEntry.compareTo(array[i]) > 0) {
             i++;
