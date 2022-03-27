@@ -21,7 +21,6 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
     public PriorityQueue() {
         firstNode = null;
         lastNode = null;
-        // numberOfEntries = 0;
     }
 
     @Override
@@ -39,8 +38,6 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
         }
         lastNode = newNode;
         lastNode.priority = prePriority + 1;
-        // System.out.print(lastNode.priority);
-        // System.out.print(lastNode.data);
     }
 
     @Override
@@ -59,7 +56,6 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
                     nodeBefore.next = currentNode.next;
                     currentNode.next = firstNode;
                     firstNode = currentNode;
-                    // currentNode.next.priority ++;
                 }
             }
         }
@@ -94,8 +90,6 @@ public class PriorityQueue<T extends Comparable<T>> implements QueueInterface<T>
             if (currentNode != null && anEntry.compareTo((T) currentNode.data) == 0) {
                 nodeBefore.next = currentNode.next;
                 currentNode = currentNode.next;
-                // currentNode.priority--;
-                // currentNode.next.priority ++;
             }
         }
 
