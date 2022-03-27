@@ -55,21 +55,6 @@ public class SortedArrayList<T extends Comparable<T>> implements SortedListInter
     }
 
     @Override
-    public T remove(int givenPosition) {
-        T result = null;
-
-        if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) {
-            result = array[givenPosition - 1];
-
-            if (givenPosition < numberOfEntries) {
-                removeGap(givenPosition);
-            }
-            numberOfEntries--;
-        }
-        return result;
-    }
-
-    @Override
     public int getPosition(T anEntry) {
         for (int i = 0; i <= numberOfEntries; i++) {
             if (getEntry(i) == anEntry) {

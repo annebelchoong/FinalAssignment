@@ -10,8 +10,6 @@ public interface SortedListInterface<T extends Comparable<T>> {
 
     public boolean remove(T anEntry);
 
-    public T remove(int givenPosition);
-
     public int getPosition(T anEntry);
 
     public T getEntry(int givenPosition);
