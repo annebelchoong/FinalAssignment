@@ -42,9 +42,8 @@ public class Reservation implements Comparable<Reservation> {
 
    @Override
    public String toString() {
-      return "\nReservation: {" +
-            " reservationNo='" + getReservationNo() + "'" +
-            ", room='" + getRoom() + "'" +
+      return "\nReservation No: " + getReservationNo()
+            + "room=" + getRoom() + "'" +
             ", member='" + getMember() + "'" +
             "}";
    }

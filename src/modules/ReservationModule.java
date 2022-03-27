@@ -1,6 +1,5 @@
 package modules;
 
-import java.time.LocalTime;
 import java.util.Scanner;
 
 import adt.YongYang.SortedArrayList;
@@ -41,13 +40,18 @@ public class ReservationModule {
     // this.reservationList = reservationList;
     // }
 
+    // public SortedListInterface<Reservation> getReservationList() {
+    //     return reservationList;
+    // }
+
     public void reservationMenu() {
         do {
             Utility.clearScreen();
             showMainMenu();
             switch (scan.nextLine()) {
                 case "1":
-                    printReservations();
+                    // printReservations();
+                    System.out.println(reservationList);
                     Utility.cont();
                     break;
                 case "2":
@@ -108,20 +112,6 @@ public class ReservationModule {
     // }
 
     private void printReservations() {
-        System.out.println("=".repeat(85));
-        System.out.print("TimeSlot ");
-        for (int r = 1; r <= roomList.getNumOfEntries(); r++) {
-            System.out.printf("|    Room %-5s", roomList.getEntry(r).getRoomNo());
-        }
-        System.out.println("\n" + "=".repeat(85));
-        for (int t = 1; t <= timeSlots.getNumOfEntries(); t++) {
-            System.out.printf(" %-5s ", timeSlots.getEntry(t).getTime());
-            for (int b = 1; b <= roomList.getNumOfEntries(); b++) {
-                System.out.printf("  |" + "  %-7s ", roomList.getEntry(b).getRoomStatus());
-            }
-            System.out.println("");
-        }
-        System.out.println("=".repeat(85));
         // for (int i = 1; i <= reservationList.getNumOfEntries(); i++) {
         // System.out.print(reservationList.getEntry(i));
         // }
@@ -129,7 +119,9 @@ public class ReservationModule {
 
     @Override
     public String toString() {
-        return "{";
+        return "{" +
+                ", reservationList='" + reservationList + "'" +
+                "}";
     }
 
 }
