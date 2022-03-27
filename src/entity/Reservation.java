@@ -1,5 +1,7 @@
 package entity;
 
+import entity.Room.RoomStatus;
+
 /**
  *
  * @author yongyang
@@ -7,13 +9,15 @@ package entity;
 public class Reservation implements Comparable<Reservation> {
    private int reservationNo = 10000;
    private Room room;
+   private TimeSlot timeSlot;
    private Member member;
 
-   public Reservation(int reservationNo, Room room, Member member) {
+   public Reservation(int reservationNo, Room room, TimeSlot timeSlot, Member member) {
       this.reservationNo = reservationNo;
       this.room = room;
+      this.timeSlot = timeSlot;
       this.member = member;
-      // this.room.setBooked();
+      // Room.roomStatus = RoomStatus.BOOKED;
    }
 
    public int getReservationNo() {
@@ -32,6 +36,14 @@ public class Reservation implements Comparable<Reservation> {
       this.room = room;
    }
 
+   public TimeSlot getTimeSlot() {
+      return this.timeSlot;
+   }
+
+   public void setTimeSlot(TimeSlot timeSlot) {
+      this.timeSlot = timeSlot;
+   }
+
    public Member getMember() {
       return this.member;
    }
@@ -42,10 +54,11 @@ public class Reservation implements Comparable<Reservation> {
 
    @Override
    public String toString() {
-      return "\nReservation No: " + getReservationNo()
-            + "room=" + getRoom() + "'" +
-            ", member='" + getMember() + "'" +
-            "}";
+      return "\nReservation No: " + getReservationNo() +
+            "\nMember ID: " + member.getMemberId() +
+            "\nMember Name: " + member.getMemberName() +
+            "\nRoom: " + getRoom() +
+            "\nTime: " + timeSlot.getTime();
    }
 
    @Override

@@ -51,13 +51,15 @@ public class RoomModule {
     public void roomMenu() {
         do {
             Utility.clearScreen();
-            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            System.out.println(printRoomHeader());
             System.out.println("[1] View Rooms");
             System.out.println("[2] Change Room Status");
             System.out.println("[0] Go back");
             System.out.print("\nEnter choice: ");
             switch (scan.nextLine()) {
                 case "1":
+                    Utility.clearScreen();
+                    System.out.println(printRoomHeader());
                     viewRoomStatus();
                     Utility.cont();
                     break;
@@ -81,7 +83,7 @@ public class RoomModule {
         } while (!exit);
     }
 
-    private void viewRoomStatus() {
+    public static void viewRoomStatus() {
         System.out.println("=".repeat(85));
         System.out.print("TimeSlot ");
         for (int r = 1; r <= roomList.getNumOfEntries(); r++) {
@@ -104,7 +106,7 @@ public class RoomModule {
         RoomStatus roomStatus = null;
         do {
             Utility.clearScreen();
-            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            System.out.println(printRoomHeader());
             viewRoomStatus();
             System.out.println("Which room would you like to change? [1] to [5]");
             System.out.print("\nEnter choice: ");
@@ -128,7 +130,7 @@ public class RoomModule {
         } while (!exit);
         do {
             Utility.clearScreen();
-            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            System.out.println(printRoomHeader());
             selectTimeSlot(roomNo);
             System.out.println("[1] 12:00\n[2] 14:00\n[3] 16:00\n[4] 18:00\n[5] 2:000\n[6] 22:00");
             System.out.println("Which time would you like to change? [1] to [6]");
@@ -154,7 +156,7 @@ public class RoomModule {
         } while (!exit);
         do {
             Utility.clearScreen();
-            System.out.println(Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines());
+            System.out.println(printRoomHeader());
             System.out.println("[1] set to Booked");
             System.out.println("[2] set to Available");
             System.out.println("[3] set to Service");
@@ -193,7 +195,7 @@ public class RoomModule {
 
     }
 
-    private void selectTimeSlot(int roomNo) {
+    public static void selectTimeSlot(int roomNo) {
         System.out.println("=".repeat(23));
         System.out.print("TimeSlot ");
         for (int r = 1; r <= roomNo; r++) {
@@ -217,5 +219,9 @@ public class RoomModule {
     private boolean changeSpecificRoomWithTime(int roomNo, int timeSlot, RoomStatus roomStatus) {
         roomList.getEntry(roomNo).setRoomStatus(roomStatus);
         return true;
+    }
+
+    private String printRoomHeader() {
+        return Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines();
     }
 }

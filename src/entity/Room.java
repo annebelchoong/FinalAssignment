@@ -48,12 +48,6 @@ public class Room implements Comparable<Room> {
     }
 
     public void setRoomStatus(RoomStatus status) {
-        // if (status == RoomStatus.BOOKED)
-        //     status = RoomStatus.BOOKED;
-        // if (status == RoomStatus.AVAILABLE)
-        //     status = RoomStatus.AVAILABLE;
-        // if (status == RoomStatus.SERVICE)
-        //     status = RoomStatus.SERVICE;
         roomStatus = status;
     }
 
@@ -67,7 +61,8 @@ public class Room implements Comparable<Room> {
 
     @Override
     public String toString() {
-        return getRoomNo() + "\t" + roomStatus;
+        return String.valueOf(getRoomNo());
+        // return getRoomNo() + "\t" + roomStatus;
     }
 
     @Override
