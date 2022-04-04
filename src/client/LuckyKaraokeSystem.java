@@ -46,11 +46,9 @@ public class LuckyKaraokeSystem {
         System.out.println("|                                            |");
         System.out.println("----------------------------------------------");
         System.out.println();
-        System.out.println();
     }
 
     public static void homeMenu() {
-        // Utility.clearScreen();
         System.out.println(" MENU");
         System.out.println("=======");
         System.out.println("[1] Song Details");

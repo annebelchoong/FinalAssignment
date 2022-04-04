@@ -18,37 +18,21 @@ public class RoomModule {
     public static Scanner scan = new Scanner(System.in);
     private static boolean exit;
 
-    public static SortedListInterface<Room> roomList = new SortedArrayList<>();
-    public static SortedListInterface<TimeSlot> timeSlots = new SortedArrayList<>();
+    public SortedListInterface<Room> roomList = new SortedArrayList<>();
+    public SortedListInterface<TimeSlot> timeSlots = new SortedArrayList<>();
 
-    public static SortedListInterface<Room> getRoomList() {
+    public SortedListInterface<Room> getRoomList() {
         return roomList;
     }
 
-    public static SortedListInterface<TimeSlot> getTimeSlots() {
+    public SortedListInterface<TimeSlot> getTimeSlots() {
         return timeSlots;
     }
 
-    public void initRoomData() {
-        roomList.clear();
-        roomList.add(new Room(1, false));
-        roomList.add(new Room(2, false));
-        roomList.add(new Room(3, false));
-        roomList.add(new Room(4, false));
-        roomList.add(new Room(5, false));
-
-        timeSlots.clear();
-        timeSlots.add(new TimeSlot(LocalTime.of(12, 0), roomList));
-        timeSlots.add(new TimeSlot(LocalTime.of(14, 0), roomList));
-        timeSlots.add(new TimeSlot(LocalTime.of(16, 0), roomList));
-        timeSlots.add(new TimeSlot(LocalTime.of(18, 0), roomList));
-        timeSlots.add(new TimeSlot(LocalTime.of(20, 0), roomList));
-        timeSlots.add(new TimeSlot(LocalTime.of(22, 0), roomList));
-    }
-
     public void roomMenu() {
+        Utility.clearScreen();
         do {
-            Utility.clearScreen();
+            exit = false;
             System.out.println(printRoomHeader());
             System.out.println("[1] View Rooms");
             System.out.println("[2] Change Room Status");
@@ -60,22 +44,23 @@ public class RoomModule {
                     System.out.println(printRoomHeader());
                     viewRoomStatus();
                     Utility.cont();
+                    Utility.clearScreen();
                     break;
                 case "2":
                     changeRoomStatusMenu();
                     break;
                 case "0":
-                    exit = true;
                     Utility.clearScreen();
-                    break;
+                    return;
                 default:
+                    Utility.clearScreen();
                     System.out.println("Invalid input, please try again.");
                     break;
             }
         } while (!exit);
     }
 
-    public static void viewRoomStatus() {
+    public void viewRoomStatus() {
         System.out.println("=".repeat(85));
         System.out.print("TimeSlot ");
         for (int r = 1; r <= roomList.getNumOfEntries(); r++) {
@@ -85,7 +70,10 @@ public class RoomModule {
         for (int t = 1; t <= timeSlots.getNumOfEntries(); t++) {
             System.out.printf(" %-5s ", timeSlots.getEntry(t).getTime());
             for (int b = 1; b <= roomList.getNumOfEntries(); b++) {
-                System.out.printf("  |" + "  %-7s ", roomList.getEntry(b).getRoomStatusinString());
+                // System.out.printf(" |" + " %-7s ",
+                // roomList.getEntry(b).getRoomStatusinString());
+                System.out.printf("  |" + "  %-7s ",
+                        timeSlots.getEntry(b).getRoomList().getEntry(b).getRoomStatusinString());
             }
             System.out.println("");
         }
@@ -94,14 +82,15 @@ public class RoomModule {
 
     public void changeRoomStatusMenu() {
         int roomNo = -1;
-        int timeSlot = 0;
+        TimeSlot timeSlot = null;
         RoomStatus roomStatus = null;
+        boolean goGetTimeSlot = false, goGetStatus = false, changeDone = false;
         do {
             Utility.clearScreen();
             System.out.println(printRoomHeader());
             viewRoomStatus();
             System.out.println("Which room would you like to change? [1] to [5]");
-            System.out.print("\nEnter choice: ");
+            System.out.print("\nChoose Room: ");
             String room = scan.nextLine();
             switch (room) {
                 case "1":
@@ -110,23 +99,20 @@ public class RoomModule {
                 case "4":
                 case "5":
                     roomNo = Integer.parseInt(room);
-                    // break;
-                    // case "0":
-                    exit = true;
+                    goGetTimeSlot = true;
                     Utility.clearScreen();
                     break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-        } while (!exit);
+        } while (!goGetTimeSlot);
         do {
             Utility.clearScreen();
             System.out.println(printRoomHeader());
             selectTimeSlot(roomNo);
-            System.out.println("[1] 12:00\n[2] 14:00\n[3] 16:00\n[4] 18:00\n[5] 2:000\n[6] 22:00");
-            System.out.println("Which time would you like to change? [1] to [6]");
-            System.out.print("\nEnter choice: ");
+            System.out.println("Which timeslot would you like to change for Room " + roomNo + "? [1] to [6]");
+            System.out.print("\nChoose Timeslot: ");
             String time = scan.nextLine();
             switch (time) {
                 case "1":
@@ -135,68 +121,67 @@ public class RoomModule {
                 case "4":
                 case "5":
                 case "6":
-                    timeSlot = Integer.parseInt(time);
-                    break;
-                case "0":
-                    exit = true;
+                    timeSlot = timeSlots.getEntry(Integer.parseInt(time));
+                    goGetStatus = true;
                     Utility.clearScreen();
                     break;
+                case "null":
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-        } while (!exit);
+        } while (!goGetStatus);
         do {
             Utility.clearScreen();
             System.out.println(printRoomHeader());
             System.out.println("[1] set to Booked");
             System.out.println("[2] set to Available");
             System.out.println("[3] set to Service");
-            System.out.println("Which status would you like to change for this room at this time? [1] to [3]");
+            System.out.println("\nWhich status would you like to change for Room " + roomNo + " at "
+                    + timeSlot + "? [1] to [3]");
             System.out.print("\nEnter choice: ");
             String status = scan.nextLine();
             switch (status) {
                 case "1":
                     status = "BOOKED";
-                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
                     break;
                 case "2":
                     status = "AVAILABLE";
-                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
                     break;
                 case "3":
                     status = "SERVICE";
-                    roomStatus = RoomStatus.valueOf(status.toUpperCase());
-                    break;
-                case "0":
-                    exit = true;
-                    Utility.clearScreen();
                     break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-        } while (!exit);
+            if (status == "BOOKED" || status == "AVAILABLE" || status == "SERVICE") {
+                roomStatus = RoomStatus.valueOf(status.toUpperCase());
+                changeDone = true;
+            }
+        } while (!changeDone);
         if (changeSpecificRoomWithTime(roomNo, timeSlot, roomStatus)) {
             System.out.println(
                     "Room " + roomNo + " for " + timeSlot + " has been changed to " + roomStatus);
             Utility.cont();
+            Utility.clearScreen();
         } else {
             System.out.println("Something wong");
         }
 
     }
 
-    public static void selectTimeSlot(int roomNo) {
-        System.out.println("=".repeat(23));
-        System.out.print("TimeSlot ");
+    public void selectTimeSlot(int roomNo) {
+        System.out.println("=".repeat(30));
+        System.out.print("   TimeSlot ");
         for (int r = 1; r <= roomNo; r++) {
             if (r == roomNo) {
                 System.out.printf("|    Room %-5s", roomList.getEntry(r).getRoomNo());
             }
         }
-        System.out.println("\n" + "=".repeat(23));
+        System.out.println("\n" + "=".repeat(30));
         for (int t = 1; t <= timeSlots.getNumOfEntries(); t++) {
+            System.out.print("[" + t + "]");
             System.out.printf(" %-5s ", timeSlots.getEntry(t).getTime());
             for (int b = 1; b <= roomNo; b++) {
                 if (b == roomNo) {
@@ -205,15 +190,34 @@ public class RoomModule {
             }
             System.out.println("");
         }
-        System.out.println("=".repeat(23));
+        System.out.println("=".repeat(30));
     }
 
-    private boolean changeSpecificRoomWithTime(int roomNo, int timeSlot, RoomStatus roomStatus) {
-        roomList.getEntry(roomNo).setRoomStatus(roomStatus);
+    private boolean changeSpecificRoomWithTime(int roomNo, TimeSlot timeSlot, RoomStatus roomStatus) {
+        // roomList.getEntry(roomNo).setRoomStatus(roomStatus);
+        int t = timeSlots.getPosition(timeSlot);
+        timeSlots.getEntry(roomNo).getRoomList().getEntry(t).setRoomStatus(roomStatus);
         return true;
     }
 
+    public void initRoomData() {
+        roomList.clear();
+        for (int i = 1; i <= 5; i++) {
+            roomList.add(new Room(i));
+        }
+
+        timeSlots.clear();
+        timeSlots.add(new TimeSlot(LocalTime.of(12, 0), roomList));
+        timeSlots.add(new TimeSlot(LocalTime.of(14, 0), roomList));
+        timeSlots.add(new TimeSlot(LocalTime.of(16, 0), roomList));
+        timeSlots.add(new TimeSlot(LocalTime.of(18, 0), roomList));
+        timeSlots.add(new TimeSlot(LocalTime.of(20, 0), roomList));
+        timeSlots.add(new TimeSlot(LocalTime.of(22, 0), roomList));
+    }
+
     private String printRoomHeader() {
-        return Utility.printHeaderLines() + "\t\tRoom Menu" + Utility.printHeaderLines();
+        return Utility.printHeaderLines() +
+                "\t\tRoom Menu" +
+                Utility.printHeaderLines();
     }
 }

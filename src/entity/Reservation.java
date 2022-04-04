@@ -15,6 +15,7 @@ public class Reservation implements Comparable<Reservation> {
       this.room = room;
       this.timeSlot = timeSlot;
       this.member = member;
+      this.room.setBooked();
    }
 
    public int getReservationNo() {

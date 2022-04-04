@@ -5,10 +5,8 @@
  */
 package client;
 
-import entity.*;
 import modules.*;
 import utility.Utility;
-
 import java.util.Scanner;
 
 /**
@@ -17,7 +15,7 @@ import java.util.Scanner;
  */
 public class KaraokeSession {
     public static Scanner input = new Scanner(System.in);
-    public static PlaylistModule playlist = new PlaylistModule();
+    public static SessionModule playlist = new SessionModule();
     public static SongModule songLib = new SongModule();
     public static RoomModule room = new RoomModule();
 
@@ -30,47 +28,17 @@ public class KaraokeSession {
         welcome();
         startSession();
 
-        // QueueInterface<Song> songQueue = new PriorityQueue<>();
-        // //Song test = new Song(1111, "Party Rock Anthem", "LMAO",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s");
-        //
-        // songQueue.insert(new Song(1111, "Party Rock Anthem", "LMAO",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-        // songQueue.insert(new Song(2222, "On the Ground", "LMAO",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-        // songQueue.insert(new Song(3333, "Heaven", "LMAO",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-        // songQueue.insert(new Song(4444, "Numb", "LMAO",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-        // songQueue.insert(new Song(5555, "Unknown", "Zara Larrson",
-        // "https://www.youtube.com/watch?v=0WM9Amg7F5s"));
-        // //songQueue.insert(new Song("Unknown"));
-        // System.out.println(songQueue);
-        // songQueue.makeFirst(new Song("On the Ground"));
-        // System.out.println(songQueue);
-
     }
 
     public static void welcome(){
         System.out.println("----------------------------------------------------");
         System.out.println("|                                                  |");
-        System.out.println("|    Welcome to Room " + RoomModule.getRoomList().getEntry(1).getRoomNo() + " for your karaoke session!   |");
+        System.out.println("|    Welcome to Room " + room.getRoomList().getEntry(1).getRoomNo() + " for your karaoke session!   |");
         System.out.println("|                                                  |");
         System.out.println("----------------------------------------------------");
         System.out.println();
         System.out.println();
     }
-
-    // public static void homeMenu() {
-
-    //     System.out.println(" M   E   N   U");
-    //     System.out.println("===============");
-    //     System.out.println("[1] Select song");
-    //     System.out.println("[2] Select playlist");
-    //     System.out.println("[3] Display song queue");
-    //     System.out.println("[0] Exit Sesion\n\n");
-    //     System.out.print("Enter your choice: ");
-    // }
 
     public static void initData() {
        playlist.initPlaylistData();

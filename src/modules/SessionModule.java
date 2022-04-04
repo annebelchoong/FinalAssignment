@@ -18,7 +18,7 @@ import java.util.TimerTask;
  *
  * @author annebelchoong
  */
-public class PlaylistModule {
+public class SessionModule {
     Scanner input = new Scanner(System.in);
     QueueInterface<Song> songQueue = new PriorityQueue<>();
     QueueInterface<Song> songList1 = new PriorityQueue<>();
@@ -29,7 +29,7 @@ public class PlaylistModule {
     public Playlist songsInPlaylist = new Playlist();
     int numberOfSongs = 0;
 
-    public PlaylistModule() {
+    public SessionModule() {
 
     }
 
@@ -154,26 +154,6 @@ public class PlaylistModule {
     }
 
     public void displayPlaylistSong(String songName, QueueInterface<Song> songList4) {
-        // boolean isFound = false;
-        // Iterator<Playlist> it = playlist.getIterator();
-        // do{
-        // while(it.hasNext()){
-        // Playlist playlistIt = it.next();
-        // if (choice.equals(String.valueOf(playlistIt.getPlaylistID()))){
-        // System.out.println(playlistIt.getPlaylistName() + " PlayList");
-        // System.out.println("");
-        // Utility.songlistHeader();
-        // System.out.println(playlistIt.getSongList());
-        // isFound = true;
-        // break;
-
-        // } else if(choice.equals(String.valueOf(playlistIt.getPlaylistID())) &&
-        // !it.hasNext()){
-        // System.out.println("Invalid playlist ID. Please try again. ");
-        // isFound = false;
-        // }
-        // }
-        // } while(!isFound);
         System.out.println("|   "+songName + " PlayList   |");
         System.out.println("");
         Utility.songlistHeader();
@@ -396,11 +376,9 @@ public class PlaylistModule {
             System.out.print("Enter the song number of the song: ");
             String songChoice = input.nextLine();
 
-            // Iterator<Song> it = songQueue.getIterator();
             Iterator<Song> it = songData.songList.getIterator();
             while (it.hasNext()) {
                 Song songIt = it.next();
-                // System.out.println(songQueue.getPriority(songIt));
 
                 if (songChoice.equals("1")) {
                     songChoice = "0";

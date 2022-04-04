@@ -7,16 +7,18 @@ package entity;
 public class Room implements Comparable<Room> {
     private int roomNo;
     private Boolean booked;
-    public static RoomStatus roomStatus;
+    private RoomStatus roomStatus;
 
     public Room() {
 
     }
 
-    public Room(int roomNo, boolean booked) {
+    public Room(int roomNo
+    ) {
         this.roomNo = roomNo;
-        this.booked = booked;
-        roomStatus = RoomStatus.AVAILABLE;
+        this.setAvailable();
+        // roomStatus = RoomStatus.AVAILABLE;
+        getRoomStatus();
     }
 
     public int getRoomNo() {
@@ -44,6 +46,13 @@ public class Room implements Comparable<Room> {
     }
 
     public RoomStatus getRoomStatus() {
+        if(booked == null){
+            roomStatus = RoomStatus.SERVICE;
+        } else if (booked){
+            roomStatus = RoomStatus.BOOKED;
+        }else {
+            roomStatus = RoomStatus.AVAILABLE;
+        }
         return roomStatus;
     }
 
@@ -72,22 +81,22 @@ public class Room implements Comparable<Room> {
     public enum RoomStatus {
         AVAILABLE, BOOKED, SERVICE;
 
-        private static RoomStatus getRoomStatus() {
-            return roomStatus;
-        }
+        // private RoomStatus getRoomStatus(Room room) {
+        //     return room.roomStatus;
+        // }
 
-        @Override
-        public String toString() {
-            switch (RoomStatus.getRoomStatus()) {
-                case BOOKED:
-                    return "Booked";
-                case SERVICE:
-                    return "Service ";
-                case AVAILABLE:
-                default:
-                    return "Available";
-            }
-        }
+        // @Override
+        // public String toString() {
+        // switch (RoomStatus.getRoomStatus()) {
+        // case BOOKED:
+        // return "Booked";
+        // case SERVICE:
+        // return "Service ";
+        // case AVAILABLE:
+        // default:
+        // return "Available";
+        // }
+        // }
 
     }
 }
